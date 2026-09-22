@@ -44,7 +44,7 @@ export function ProductView() {
                 <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
               </span>
               <span className="rounded-md border border-hairline px-2.5 py-1 text-[11px] text-muted">
-                TheCarriers · Envíos
+                The Carriers · Envíos
               </span>
             </div>
 
