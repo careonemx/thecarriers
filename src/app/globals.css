@@ -59,6 +59,21 @@
   --color-control: rgba(255, 255, 255, 0.05);
   --color-control-fuerte: rgba(255, 255, 255, 0.1);
 
+  /* El hover de una pieza dentro de una tarjeta. Sigue la escalera de su
+     token: en oscuro sube, en claro baja. Estaba escrito a mano como `navy`,
+     y sobre blanco eso es un bloque azul con el texto encima: se lee el fondo
+     y no la palabra. */
+  --color-inset-fuerte: var(--color-navy);
+
+  /* Pastillas de estado, las mismas del administrador. */
+  --color-mal: #fca5a5;
+  --color-mal-fondo: rgba(248, 113, 113, 0.12);
+  --color-mal-borde: rgba(248, 113, 113, 0.4);
+  --color-aviso: #fde68a;
+  --color-aviso-fondo: rgba(251, 191, 36, 0.12);
+  --color-aviso-borde: rgba(251, 191, 36, 0.4);
+
+
   /* El nodo encendido del diagrama. En oscuro sube a navy y destaca por ser
      más claro; en claro, navy sería un bloque negro en medio de un dibujo
      claro, así que destaca con un velo del verde de marca. */
@@ -128,6 +143,21 @@
   --color-control: rgba(255, 255, 255, 0.05);
   --color-control-fuerte: rgba(255, 255, 255, 0.1);
 
+  /* El hover de una pieza dentro de una tarjeta. Sigue la escalera de su
+     token: en oscuro sube, en claro baja. Estaba escrito a mano como `navy`,
+     y sobre blanco eso es un bloque azul con el texto encima: se lee el fondo
+     y no la palabra. */
+  --color-inset-fuerte: var(--color-navy);
+
+  /* Pastillas de estado, las mismas del administrador. */
+  --color-mal: #fca5a5;
+  --color-mal-fondo: rgba(248, 113, 113, 0.12);
+  --color-mal-borde: rgba(248, 113, 113, 0.4);
+  --color-aviso: #fde68a;
+  --color-aviso-fondo: rgba(251, 191, 36, 0.12);
+  --color-aviso-borde: rgba(251, 191, 36, 0.4);
+
+
   /* El nodo encendido del diagrama. En oscuro sube a navy y destaca por ser
      más claro; en claro, navy sería un bloque negro en medio de un dibujo
      claro, así que destaca con un velo del verde de marca. */
@@ -166,6 +196,16 @@
   --trazo: rgba(18, 28, 51, 0.16);
   --trazo-fuerte: rgba(18, 28, 51, 0.2);
   --color-inset: #f4f5f9;
+  --color-inset-fuerte: #e7eaf1;
+
+  /* Sobre blanco el mismo rojo claro no se lee: el texto baja y el fondo
+     sube, que es lo mismo que hace el resto de la paleta. */
+  --color-mal: #b42318;
+  --color-mal-fondo: rgba(248, 113, 113, 0.14);
+  --color-mal-borde: rgba(220, 38, 38, 0.35);
+  --color-aviso: #92610a;
+  --color-aviso-fondo: rgba(251, 191, 36, 0.18);
+  --color-aviso-borde: rgba(217, 119, 6, 0.35);
   --color-destacado: rgba(15, 157, 110, 0.1);
 
   --color-hairline: rgba(18, 28, 51, 0.12);
@@ -227,6 +267,35 @@ body {
 
 .tabular {
   font-variant-numeric: tabular-nums;
+}
+
+/* -----------------------------------------------------------------
+ * El resplandor que sigue al cursor.
+ *
+ * Los valores por defecto son los del resplandor de siempre —centrado y
+ * arriba—, así que sin JS, sin ratón o con el movimiento reducido queda
+ * exactamente lo que había antes. El componente solo mueve las variables.
+ * --------------------------------------------------------------- */
+.halo-cursor {
+  position: absolute;
+  inset: 0;
+  z-index: -10;
+  pointer-events: none;
+  background: radial-gradient(
+    var(--halo-r, 38% 52%) at var(--halo-x, 50%) var(--halo-y, 0px),
+    rgba(15, 157, 110, var(--halo-fuerza, 0.16)),
+    transparent 70%
+  );
+  transition: opacity 0.4s var(--ease-signal);
+}
+
+/* Al perseguir al cursor el foco es más pequeño y algo más intenso: repartido
+   por toda la sección no se notaría que se mueve. */
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .halo-cursor {
+    --halo-r: 22% 34%;
+    --halo-fuerza: 0.2;
+  }
 }
 
 /* Las dos versiones del logotipo conviven y el tema esconde la que sobra. */

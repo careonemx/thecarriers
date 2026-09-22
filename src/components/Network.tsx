@@ -351,7 +351,7 @@ const C_WIRE = 76;
 const C_CHIP_MAX = 44;
 
 const chipCompacta =
-  "flex items-center justify-center rounded-md border border-hairline bg-inset px-2 text-center text-[11px] font-medium leading-tight text-ink transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-navy sm:text-xs";
+  "flex items-center justify-center rounded-md border border-hairline bg-inset px-2 text-center text-[11px] font-medium leading-tight text-ink transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-inset-fuerte sm:text-xs";
 
 export function ConvergenceDiagram() {
   const altoCanal = altoFicha(canales.length, C_COL, C_CHIP_MAX);

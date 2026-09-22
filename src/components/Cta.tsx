@@ -9,7 +9,13 @@ export function Cta() {
             aria-hidden
             className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.22),transparent_68%)] blur-2xl"
           />
-          <div className="relative grid gap-12 md:grid-cols-2">
+          {/* Dos huecos, no uno. El vertical: el texto es corto y el formulario
+              largo, así que alineados arriba quedaban 340px de nada debajo del
+              texto; centrados, ese aire se reparte. El horizontal: el
+              formulario tenía media tarjeta y solo ocupaba 448px, y los 124
+              que sobraban se sumaban al hueco entre columnas. Ahora su columna
+              mide lo que él. */}
+          <div className="relative grid gap-12 md:grid-cols-[1fr_28rem] md:items-center">
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-link">
                 Acceso anticipado
@@ -34,7 +40,7 @@ export function Cta() {
                 ))}
               </ul>
             </div>
-            <div className="md:justify-self-end md:max-w-md md:w-full">
+            <div>
               <AccessForm />
             </div>
           </div>

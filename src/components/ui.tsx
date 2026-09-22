@@ -131,6 +131,16 @@ function Trayecto({ d, dur, delay = 0 }: { d: string; dur: number; delay?: numbe
   );
 }
 
+/* Los tres glifos comparten caja y, sobre todo, la MISMA zona útil dentro de
+   ella: x de 6 a 126, y de 8 a 56. Sin eso cada uno se estiraba hasta donde
+   le pedía su propio dibujo —el primero llegaba al borde de abajo y el
+   tercero se quedaba flotando— y las tres tarjetas, puestas en fila, no
+   casaban. La caja es la misma; lo que hay que igualar es el contenido. */
+const G = { x0: 6, x1: 126, y0: 8, y1: 56, cy: 32 };
+
+/** Los cuatro carriles del abanico, repartidos dentro de la zona útil. */
+const CARRILES = [13, 26, 39, 52];
+
 export function StepGlyph({ name }: { name: Glifo }) {
   return (
     <svg
@@ -141,23 +151,23 @@ export function StepGlyph({ name }: { name: Glifo }) {
     >
       {name === "canales" && (
         <>
-          {[10, 26, 42, 58].map((y, i) => (
+          {CARRILES.map((y, i) => (
             <g key={y}>
-              <rect x="2" y={y - 5} width="30" height="10" rx="3" stroke={tenue} />
-              <Trayecto d={`M32 ${y} C 70 ${y}, 78 32, 108 32`} dur={2.8} delay={i * 0.25} />
+              <rect x={G.x0} y={y - 5} width="30" height="10" rx="3" stroke={tenue} />
+              <Trayecto d={`M36 ${y} C 72 ${y}, 78 ${G.cy}, 104 ${G.cy}`} dur={2.8} delay={i * 0.25} />
             </g>
           ))}
-          <rect x="108" y="22" width="20" height="20" rx="6" stroke="var(--color-accent)" />
+          <rect x="104" y={G.cy - 10} width="20" height="20" rx="6" stroke="var(--color-accent)" />
         </>
       )}
 
       {name === "cuentas" && (
         <>
-          <rect x="4" y="22" width="20" height="20" rx="6" stroke="var(--color-accent)" />
-          {[10, 26, 42, 58].map((y, i) => (
+          <rect x={G.x0 + 2} y={G.cy - 10} width="20" height="20" rx="6" stroke="var(--color-accent)" />
+          {CARRILES.map((y, i) => (
             <g key={y}>
-              <Trayecto d={`M24 32 C 54 32, 62 ${y}, 98 ${y}`} dur={2.8} delay={0.3 + i * 0.25} />
-              <rect x="98" y={y - 5} width="30" height="10" rx="3" stroke={tenue} />
+              <Trayecto d={`M28 ${G.cy} C 60 ${G.cy}, 66 ${y}, 96 ${y}`} dur={2.8} delay={0.3 + i * 0.25} />
+              <rect x="96" y={y - 5} width="30" height="10" rx="3" stroke={tenue} />
             </g>
           ))}
         </>
@@ -165,13 +175,20 @@ export function StepGlyph({ name }: { name: Glifo }) {
 
       {name === "opera" && (
         <>
-          <rect x="6" y="6" width="120" height="52" rx="8" stroke={tenue} />
-          <path d="M6 20h120" stroke={tenue} strokeWidth="1.5" />
-          <path d="M34 6v52" stroke={tenue} strokeWidth="1.5" />
-          <Trayecto d="M44 32 H 116" dur={2.4} />
-          <Trayecto d="M44 44 H 116" dur={2.4} delay={0.6} />
-          <circle cx="14" cy="13" r="2" fill={tenue} stroke="none" />
-          <circle cx="22" cy="13" r="2" fill={tenue} stroke="none" />
+          <rect
+            x={G.x0}
+            y={G.y0}
+            width={G.x1 - G.x0}
+            height={G.y1 - G.y0}
+            rx="8"
+            stroke={tenue}
+          />
+          <path d={`M${G.x0} 22 H ${G.x1}`} stroke={tenue} strokeWidth="1.5" />
+          <path d={`M34 ${G.y0} V ${G.y1}`} stroke={tenue} strokeWidth="1.5" />
+          <Trayecto d="M44 34 H 116" dur={2.4} />
+          <Trayecto d="M44 46 H 116" dur={2.4} delay={0.6} />
+          <circle cx="14" cy="15" r="2" fill={tenue} stroke="none" />
+          <circle cx="22" cy="15" r="2" fill={tenue} stroke="none" />
         </>
       )}
     </svg>

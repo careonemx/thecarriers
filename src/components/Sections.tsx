@@ -143,7 +143,7 @@ function Grupo({
         {items.map((it) => (
           <li
             key={it.nombre}
-            className="flex items-center gap-3 rounded-xl border border-hairline bg-control px-3 py-3 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-accent/40 hover:bg-banda"
+            className="flex items-center gap-3 rounded-xl border border-hairline bg-control px-3 py-3 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-accent/40 hover:bg-control-fuerte"
           >
             {/* Monograma tipográfico nuestro, no el logotipo de la marca. */}
             <span

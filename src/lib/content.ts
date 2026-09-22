@@ -21,65 +21,98 @@ export const hero = {
   nota: "No vendemos guías ni cambiamos tus tarifas. Solo conectamos las cuentas que ya tienes.",
 };
 
-/** Los envíos de la tabla de muestra. Datos de ejemplo. */
+/**
+ * Las filas de la maqueta.
+ *
+ * Copian la tabla de Pedidos del administrador: sus columnas, sus estados y
+ * la forma de sus celdas —el folio con su fecha, el cliente con su correo, la
+ * dirección con su ciudad—. Enseñar una pantalla que no existe es prometer un
+ * producto que no existe, y el que existe está construido.
+ *
+ * Los datos son de muestra y así se dice al pie de la tabla.
+ */
 export const demoRows = [
   {
-    canal: "Shopify",
-    paqueteria: "DHL",
-    guia: "JD01480000123",
-    pedido: "#10422",
-    estado: "En tránsito",
-    original: "Shipment in transit",
-    tono: "info",
+    folio: "#1007",
+    fecha: "21 sep",
+    cliente: "Arturo García",
+    correo: "arturo@monarca.mx",
+    destino: "Porto Alegre 9, Int. Casa",
+    ciudad: "Puebla, PUE 72495",
+    total: "$1,240.00",
+    pago: "Pagado",
+    pagoTono: "good",
+    envio: "877543753572",
+    envioTono: "good",
   },
   {
-    canal: "Mercado Libre",
-    paqueteria: "FedEx",
-    guia: "782394001122",
-    pedido: "#10419",
-    estado: "Detenido",
-    original: "Delivery exception",
-    tono: "bad",
+    folio: "#1006",
+    fecha: "17 sep",
+    cliente: "Laura Méndez",
+    correo: "laura@tiendaluna.mx",
+    destino: "Río Lerma 232",
+    ciudad: "Ciudad de México, CDMX 06600",
+    total: "$860.00",
+    pago: "Pagado",
+    pagoTono: "good",
+    envio: "Detenido en paquetería",
+    envioTono: "bad",
   },
   {
-    canal: "Tiendanube",
-    paqueteria: "Estafeta",
-    guia: "6050000112233",
-    pedido: "#10417",
-    estado: "Entregado",
-    original: "Entregado a destinatario",
-    tono: "good",
+    folio: "#1005",
+    fecha: "17 sep",
+    cliente: "Comercializadora Vega",
+    correo: "compras@vega.com.mx",
+    destino: "Moliere 450",
+    ciudad: "Ciudad de México, CDMX 11529",
+    total: "$3,120.00",
+    pago: "Pagado",
+    pagoTono: "good",
+    envio: "794611552340",
+    envioTono: "good",
   },
   {
-    canal: "Amazon",
-    paqueteria: "UPS",
-    guia: "1Z999AA10123",
-    pedido: "#10415",
-    estado: "Recolección pendiente",
-    original: "Pickup scheduled",
-    tono: "warn",
+    folio: "#1004",
+    fecha: "17 sep",
+    cliente: "Iván Salas",
+    correo: "ivan.salas@correo.mx",
+    destino: "Lago Zurich 96",
+    ciudad: "Ciudad de México, CDMX 11529",
+    total: "$410.00",
+    pago: "Pagado",
+    pagoTono: "good",
+    envio: "Requiere corrección",
+    envioTono: "warn",
   },
   {
-    canal: "WooCommerce",
-    paqueteria: "Redpack",
-    guia: "RP-4410982",
-    pedido: "#10413",
-    estado: "En tránsito",
-    original: "EN RUTA",
-    tono: "info",
+    folio: "#1003",
+    fecha: "16 sep",
+    cliente: "Rocío Ibarra",
+    correo: "rocio@estudioibarra.mx",
+    destino: "Havre 30",
+    ciudad: "Ciudad de México, CDMX 06600",
+    total: "$2,980.00",
+    pago: "Pendiente",
+    pagoTono: "warn",
+    envio: "Sin guía",
+    envioTono: "info",
   },
   {
-    canal: "Tienda propia",
-    paqueteria: "T1 Envíos",
-    guia: "T1-88213",
-    pedido: "#10411",
-    estado: "Entregado",
-    original: "IN_TRANSIT",
-    tono: "good",
+    folio: "#1002",
+    fecha: "15 sep",
+    cliente: "Héctor Nava",
+    correo: "hnava@tallerlumbre.mx",
+    destino: "Av. Juárez 1804",
+    ciudad: "Monterrey, NL 64000",
+    total: "$1,750.00",
+    pago: "Pagado",
+    pagoTono: "good",
+    envio: "794611551088",
+    envioTono: "good",
   },
 ] as const;
 
-export type Tono = (typeof demoRows)[number]["tono"];
+export type Tono = "info" | "good" | "bad" | "warn";
 
 /* ---------- Nodos de los diagramas e integraciones ----------
  * `sigla` es un monograma tipográfico nuestro, no el logotipo de la marca.

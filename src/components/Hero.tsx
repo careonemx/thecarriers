@@ -1,3 +1,4 @@
+import { HaloCursor } from "./HaloCursor";
 import { HeroNetwork } from "./Network";
 import { hero } from "@/lib/content";
 import { btnFantasma, btnPrimario } from "./ui";
@@ -10,10 +11,9 @@ export function Hero() {
         aria-hidden
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] bg-[radial-gradient(60%_58%_at_50%_0%,var(--halo-hero),transparent_72%)]"
       />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-[120px] -z-10 h-[420px] bg-[radial-gradient(38%_52%_at_50%_0%,rgba(15,157,110,.16),transparent_70%)]"
-      />
+      {/* El verde ya no es una mancha fija detrás del titular: sigue al
+          cursor. Quieta se leía como una imperfección del fondo. */}
+      <HaloCursor className="top-[120px] h-[420px]" />
 
       <div className="shell pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="mx-auto max-w-3xl text-center">
