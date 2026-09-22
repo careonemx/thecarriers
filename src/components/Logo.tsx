@@ -21,7 +21,7 @@ export function Lockup({ variant = "navy", height = 28, className = "", priority
     <Image
       src={src}
       alt="TheCarriers"
-      width={Math.round(height * (321 / 64))}
+      width={Math.round(height * (329 / 64))}
       height={height}
       priority={priority}
       className={className}
