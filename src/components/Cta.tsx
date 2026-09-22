@@ -4,7 +4,12 @@ export function Cta() {
   return (
     <section id="acceso" className="scroll-mt-20 border-t border-hairline">
       <div className="shell py-20 md:py-28">
-        <div className="relative overflow-hidden rounded-3xl border border-hairline bg-raise p-8 md:p-12">
+        {/* El contenedor del sitio llega a 1920 en pantallas muy anchas, y eso a
+            esta tarjeta no le sirve: un párrafo y un formulario no necesitan
+            1729px. Sin tope, la columna del texto se quedaba con 1135 para
+            llenar 632, y los 503 que sobraban se leían como un hueco entre
+            las dos mitades. */}
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-3xl border border-hairline bg-raise p-8 md:p-12">
           <div
             aria-hidden
             className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.22),transparent_68%)] blur-2xl"
