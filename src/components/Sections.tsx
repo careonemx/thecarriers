@@ -65,11 +65,13 @@ export function HowItWorks() {
         <ol className="mt-12 grid gap-4 lg:grid-cols-3">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 90}>
-              <li className={`${card} flex h-full items-start gap-4`}>
+              {/* El dibujo se centra contra el bloque de texto, que es el alto
+                  de la tarjeta: arriba del todo quedaba colgando cuando la
+                  descripción ocupaba tres renglones. */}
+              <li className={`${card} flex h-full items-center gap-4`}>
                 <StepGlyph name={s.glifo} />
                 <div className="min-w-0">
-                  <p className="tabular font-mono text-xs text-link">{s.n}</p>
-                  <h3 className="mt-1.5 text-lg font-semibold text-strong">{s.t}</h3>
+                  <h3 className="text-lg font-semibold text-strong">{s.t}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
                 </div>
               </li>
