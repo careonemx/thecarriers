@@ -193,8 +193,8 @@
 
   /* Algo más marcado que su equivalente oscuro: un trazo fino se pierde antes
      sobre blanco que sobre negro. */
-  --trazo: rgba(18, 28, 51, 0.16);
-  --trazo-fuerte: rgba(18, 28, 51, 0.2);
+  --trazo: rgba(18, 28, 51, 0.22);
+  --trazo-fuerte: rgba(18, 28, 51, 0.26);
   --color-inset: #f4f5f9;
   --color-inset-fuerte: #e7eaf1;
 
