@@ -118,9 +118,9 @@ function CoreNode({
         aria-hidden
         className="halo pointer-events-none absolute -inset-8 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.38),transparent_68%)] blur-2xl"
       />
-      <div className="relative flex flex-col items-center justify-center rounded-2xl border border-accent/40 bg-navy px-4 py-6 text-center shadow-[0_24px_70px_-30px_rgba(15,157,110,.9)]">
-        <Mark variant="white" height={alto} />
-        <p className="mt-3 text-sm font-semibold leading-tight text-white">{titulo}</p>
+      <div className="relative flex flex-col items-center justify-center rounded-2xl border border-accent/40 bg-destacado px-4 py-6 text-center shadow-[0_24px_70px_-30px_rgba(15,157,110,.9)]">
+        <Mark variant="auto" height={alto} />
+        <p className="mt-3 text-sm font-semibold leading-tight text-strong">{titulo}</p>
         <p className="mt-1 text-[11px] leading-tight text-muted">{pie}</p>
       </div>
     </div>
@@ -143,7 +143,7 @@ export function HeroNetwork() {
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_60%_at_50%_45%,rgba(15,157,110,.13),transparent_70%)]"
       />
-      <div className="rounded-2xl border border-hairline bg-navy-900/60 p-5 backdrop-blur-sm sm:p-8">
+      <div className="rounded-2xl border border-hairline bg-raise p-5 backdrop-blur-sm sm:p-8">
         {/* Desde lg: canales a la izquierda, TheCarriers al centro, paqueterías a la derecha.
             Los rótulos van en su propia fila, con las mismas proporciones: si
             viven dentro de la columna, empujan el SVG y los cables nacen arriba
@@ -214,8 +214,8 @@ function Columna({
               onMouseLeave={() => onActivo(null)}
               className={`flex items-center gap-2.5 rounded-xl border px-3 transition-colors duration-300 ease-[var(--ease-signal)] ${
                 encendido
-                  ? "border-accent/50 bg-navy"
-                  : "border-hairline bg-navy-900"
+                  ? "border-accent/50 bg-destacado"
+                  : "border-hairline bg-inset"
               }`}
             >
               <Sigla texto={it.sigla} encendido={encendido} />
@@ -235,8 +235,8 @@ function Sigla({ texto, encendido = false }: { texto: string; encendido?: boolea
       aria-hidden
       className={`grid h-7 w-7 shrink-0 place-items-center rounded-md border font-mono text-[10px] transition-colors duration-300 ease-[var(--ease-signal)] ${
         encendido
-          ? "border-accent/50 bg-accent/20 text-emerald-300"
-          : "border-hairline bg-white/5 text-muted"
+          ? "border-accent/50 bg-accent/20 text-link"
+          : "border-hairline bg-raise text-ink"
       }`}
     >
       {texto}
@@ -287,7 +287,7 @@ function Rejilla({ items }: { items: Nodo[] }) {
       {items.map((it) => (
         <li
           key={it.nombre}
-          className="flex min-h-11 items-center gap-2 rounded-xl border border-hairline bg-navy-900 px-2.5 py-2"
+          className="flex min-h-11 items-center gap-2 rounded-xl border border-hairline bg-inset px-2.5 py-2"
         >
           <Sigla texto={it.sigla} />
           {/* Sin truncar: "API / sistema propio" no cabe en una línea a 390px. */}
@@ -351,13 +351,13 @@ const C_WIRE = 76;
 const C_CHIP_MAX = 44;
 
 const chipCompacta =
-  "flex items-center justify-center rounded-md border border-hairline bg-navy-900 px-2 text-center text-[11px] font-medium leading-tight text-ink transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-navy sm:text-xs";
+  "flex items-center justify-center rounded-md border border-hairline bg-inset px-2 text-center text-[11px] font-medium leading-tight text-ink transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-navy sm:text-xs";
 
 export function ConvergenceDiagram() {
   const altoCanal = altoFicha(canales.length, C_COL, C_CHIP_MAX);
   const altoPaq = altoFicha(destinos.length, C_COL, C_CHIP_MAX);
   return (
-    <div className="rounded-2xl border border-hairline bg-navy-900/60 p-5 sm:p-6">
+    <div className="rounded-2xl border border-hairline bg-raise p-5 sm:p-6">
       <div className="mx-auto hidden max-w-[920px] items-center lg:flex">
         <ul className="flex min-w-0 flex-1 flex-col justify-between" style={{ height: C_COL }}>
           {canales.map((c) => (
@@ -383,9 +383,9 @@ export function ConvergenceDiagram() {
       </div>
 
       <div className="mt-6 grid gap-3 border-t border-hairline pt-5 text-center text-[11px] text-muted sm:grid-cols-3">
-        <span className="rounded-md bg-white/5 px-2 py-1.5">Tus canales de venta</span>
-        <span className="rounded-md bg-white/5 px-2 py-1.5">Tu equipo, en una pantalla</span>
-        <span className="rounded-md bg-white/5 px-2 py-1.5">{rotuloDestinos}</span>
+        <span className="rounded-md bg-raise-2 px-2 py-1.5">Tus canales de venta</span>
+        <span className="rounded-md bg-raise-2 px-2 py-1.5">Tu equipo, en una pantalla</span>
+        <span className="rounded-md bg-raise-2 px-2 py-1.5">{rotuloDestinos}</span>
       </div>
     </div>
   );
@@ -396,9 +396,9 @@ export function ConvergenceDiagram() {
  * --------------------------------------------------------------- */
 export function ApiFlow() {
   return (
-    <div className="rounded-2xl border border-hairline bg-navy-900/60 p-6">
+    <div className="rounded-2xl border border-hairline bg-raise p-6">
       <div className="mx-auto flex max-w-sm flex-col items-center">
-        <div className="flex w-full items-center gap-3 rounded-xl border border-hairline bg-navy-900 px-4 py-3">
+        <div className="flex w-full items-center gap-3 rounded-xl border border-hairline bg-inset px-4 py-3">
           <Sigla texto="{}" />
           <span className="text-sm font-medium text-ink">Tu sistema propio</span>
         </div>
@@ -410,10 +410,10 @@ export function ApiFlow() {
             aria-hidden
             className="halo pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.32),transparent_70%)] blur-2xl"
           />
-          <div className="relative flex w-full items-center gap-3 rounded-xl border border-accent/40 bg-navy px-4 py-4 shadow-[0_24px_70px_-34px_rgba(15,157,110,.9)]">
-            <Mark variant="white" height={26} />
+          <div className="relative flex w-full items-center gap-3 rounded-xl border border-accent/40 bg-destacado px-4 py-4 shadow-[0_24px_70px_-34px_rgba(15,157,110,.9)]">
+            <Mark variant="auto" height={26} />
             <div>
-              <p className="text-sm font-semibold leading-tight text-white">TheCarriers API</p>
+              <p className="text-sm font-semibold leading-tight text-strong">TheCarriers API</p>
               <p className="mt-0.5 text-[11px] leading-tight text-muted">Una sola integración</p>
             </div>
           </div>
@@ -426,7 +426,7 @@ export function ApiFlow() {
           {destinos.map((p) => (
             <li
               key={p.nombre}
-              className="truncate rounded-md border border-hairline bg-navy-900 px-2 py-1.5 text-center text-[11px] font-medium text-ink"
+              className="truncate rounded-md border border-hairline bg-inset px-2 py-1.5 text-center text-[11px] font-medium text-ink"
             >
               {p.nombre}
             </li>

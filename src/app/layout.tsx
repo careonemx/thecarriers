@@ -74,9 +74,25 @@ export const viewport: Viewport = {
   themeColor: "#0b1220",
 };
 
+/* El tema vive en localStorage y el servidor no puede leerlo: este sitio se
+   exporta estático. El script corre mientras el navegador analiza el HTML, o
+   sea antes del primer pintado, así que no hay salto de oscuro a claro.
+   `suppressHydrationWarning` le dice a React que acepte el atributo que puso
+   el script en vez del que trae su render. */
+const APLICAR_TEMA = `(function(){try{var t=localStorage.getItem("tc-tema");` +
+  `if(t==="claro")document.documentElement.setAttribute("data-tema","claro")}catch(e){}})()`;
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="es-MX" className={`${inter.variable} h-full`}>
+    <html
+      lang="es-MX"
+      data-tema="oscuro"
+      suppressHydrationWarning
+      className={`${inter.variable} h-full`}
+    >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: APLICAR_TEMA }} />
+      </head>
       <body className="flex min-h-full flex-col">
         <DatosEstructurados />
         {children}

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Lockup } from "./Logo";
+import { TemaToggle } from "./TemaToggle";
 import { nav } from "@/lib/content";
 import { APP_URL } from "@/lib/site";
 
@@ -25,7 +26,7 @@ export function Header() {
   }, [open]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-hairline bg-abyss/80 backdrop-blur-md">
+    <header className="sticky top-0 z-40 border-b border-hairline bg-page/85 backdrop-blur-md">
       <div className="shell flex h-16 items-center justify-between gap-4">
         <div className="flex min-w-0 items-center gap-4">
           <Link
@@ -33,7 +34,7 @@ export function Header() {
             aria-label="TheCarriers, inicio"
             className="inline-flex shrink-0 items-center"
           >
-            <Lockup variant="white" height={26} priority />
+            <Lockup variant="auto" height={26} priority />
           </Link>
           <span className="hidden items-center gap-2 rounded-full border border-hairline px-2.5 py-1 text-[11px] font-medium text-muted lg:inline-flex">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
@@ -58,6 +59,10 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          <div className="hidden sm:block">
+            <TemaToggle />
+          </div>
+
           {/* Desde sm: en pantallas muy angostas compite con el botón principal. */}
           <a
             href={APP_URL}
@@ -68,7 +73,7 @@ export function Header() {
 
           <a
             href="#acceso"
-            className="inline-flex items-center whitespace-nowrap rounded-lg bg-accent px-3 py-2.5 text-sm font-semibold text-abyss transition-[filter] duration-200 ease-[var(--ease-signal)] hover:brightness-110 sm:px-4"
+            className="inline-flex items-center whitespace-nowrap rounded-lg bg-accent-solid px-3 py-2.5 text-sm font-semibold text-on-accent transition-[filter] duration-200 ease-[var(--ease-signal)] hover:brightness-110 sm:px-4"
           >
             Solicitar acceso
           </a>
@@ -106,7 +111,7 @@ export function Header() {
         </div>
       </div>
 
-      <div id="menu-movil" hidden={!open} className="border-t border-hairline bg-abyss md:hidden">
+      <div id="menu-movil" hidden={!open} className="border-t border-hairline bg-page md:hidden">
         <nav aria-label="Principal, móvil" className="shell flex flex-col py-2">
           {nav.map((n) => (
             <a
@@ -120,10 +125,14 @@ export function Header() {
           ))}
           <a
             href={APP_URL}
-            className="py-3.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-ink"
+            className="border-b border-hairline py-3.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-ink"
           >
             Iniciar sesión
           </a>
+          <div className="flex items-center justify-between py-3.5">
+            <span className="text-sm font-medium text-muted">Tema</span>
+            <TemaToggle />
+          </div>
         </nav>
       </div>
     </header>

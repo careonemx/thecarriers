@@ -3,8 +3,8 @@ import { Reveal } from "./Reveal";
 import { SectionTitle } from "./ui";
 
 const tono: Record<Tono, string> = {
-  info: "border-navy-700 bg-navy-700/45 text-navy-100",
-  good: "border-accent/45 bg-accent/15 text-emerald-300",
+  info: "border-hairline-strong bg-raise-2 text-ink",
+  good: "border-accent/45 bg-accent/15 text-link",
   bad: "border-red-400/40 bg-red-400/12 text-red-300",
   warn: "border-amber-400/40 bg-amber-400/12 text-amber-200",
 };
@@ -35,13 +35,13 @@ export function ProductView() {
         />
 
         <Reveal className="mt-14">
-          <div className="overflow-hidden rounded-2xl border border-hairline bg-navy-900 shadow-[0_60px_130px_-60px_rgba(0,0,0,.95)]">
+          <div data-tema="oscuro" className="overflow-hidden rounded-2xl border border-hairline bg-inset shadow-[0_60px_130px_-60px_rgba(0,0,0,.95)]">
             {/* Barra de la ventana */}
             <div className="flex items-center gap-3 border-b border-hairline bg-navy/60 px-4 py-3">
               <span aria-hidden className="flex gap-1.5">
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
+                <span className="h-2.5 w-2.5 rounded-full bg-hairline-strong" />
+                <span className="h-2.5 w-2.5 rounded-full bg-hairline-strong" />
+                <span className="h-2.5 w-2.5 rounded-full bg-hairline-strong" />
               </span>
               <span className="rounded-md border border-hairline px-2.5 py-1 text-[11px] text-muted">
                 The Carriers · Envíos
@@ -59,7 +59,7 @@ export function ProductView() {
                     key={m.t}
                     className={`rounded-lg px-3 py-2 text-sm ${
                       m.activo
-                        ? "bg-white/8 font-medium text-ink"
+                        ? "bg-raise-2 font-medium text-ink"
                         : "text-muted"
                     }`}
                   >
@@ -88,7 +88,7 @@ export function ProductView() {
                       Ejemplo de la pantalla de envíos: cada guía con el canal por el que entró el
                       pedido, su paquetería, el estado y el estado original de la paquetería.
                     </caption>
-                    <thead className="bg-white/4 text-[11px] uppercase tracking-[0.12em] text-muted">
+                    <thead className="bg-raise-2 text-[11px] uppercase tracking-[0.12em] text-muted">
                       <tr>
                         {columnas.map((c) => (
                           <th key={c} scope="col" className="px-4 py-2.5 font-medium">
@@ -101,7 +101,7 @@ export function ProductView() {
                       {demoRows.map((r) => (
                         <tr
                           key={r.guia}
-                          className="transition-colors duration-200 ease-[var(--ease-signal)] hover:bg-white/4"
+                          className="transition-colors duration-200 ease-[var(--ease-signal)] hover:bg-raise-2"
                         >
                           <td className="px-4 py-3 text-muted">{r.canal}</td>
                           <td className="px-4 py-3 font-medium text-ink">{r.paqueteria}</td>

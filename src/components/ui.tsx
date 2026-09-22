@@ -7,16 +7,16 @@ import type { Glifo, Icono } from "@/lib/content";
 
 /** Tarjeta base. El hover levanta el borde, no el contenido. */
 export const card =
-  "rounded-2xl border border-hairline bg-navy-900/70 p-6 transition-[border-color,background-color,box-shadow] duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-navy-900 hover:shadow-[0_24px_60px_-40px_rgba(15,157,110,.8)]";
+  "rounded-2xl border border-hairline bg-raise p-6 transition-[border-color,background-color,box-shadow] duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-raise hover:shadow-[0_24px_60px_-40px_rgba(15,157,110,.8)]";
 
 /* Texto oscuro sobre el verde de marca: blanco sobre accent da 3.46:1 y
    reprueba AA; abyss sobre accent da 5.32:1. El hover aclara en vez de
    oscurecer, porque accent-600 dejaría el texto oscuro sin contraste. */
 export const btnPrimario =
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-abyss shadow-[0_18px_40px_-22px_rgba(15,157,110,.9)] transition-[filter,box-shadow] duration-200 ease-[var(--ease-signal)] hover:brightness-110";
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-accent-solid px-5 py-3 text-sm font-semibold text-on-accent shadow-[0_18px_40px_-22px_rgba(15,157,110,.9)] transition-[filter,box-shadow] duration-200 ease-[var(--ease-signal)] hover:brightness-110";
 
 export const btnFantasma =
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-hairline-strong bg-white/5 px-5 py-3 text-sm font-semibold text-ink transition-colors duration-200 ease-[var(--ease-signal)] hover:border-accent/60 hover:bg-white/10";
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-hairline-strong bg-raise px-5 py-3 text-sm font-semibold text-ink transition-colors duration-200 ease-[var(--ease-signal)] hover:border-accent/60 hover:bg-raise-2";
 
 export function SectionTitle({
   eyebrow,
@@ -32,8 +32,8 @@ export function SectionTitle({
   const centrado = align === "center";
   return (
     <div className={centrado ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">{eyebrow}</p>
-      <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-[2.75rem] md:leading-[1.08]">
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-link">{eyebrow}</p>
+      <h2 className="mt-4 text-3xl font-semibold tracking-tight text-strong md:text-[2.75rem] md:leading-[1.08]">
         {title}
       </h2>
       {text && <p className="mt-5 text-base text-muted md:text-lg">{text}</p>}
@@ -87,7 +87,7 @@ const trazos: Record<Icono, ReactNode> = {
 
 export function ModuleIcon({ name }: { name: Icono }) {
   return (
-    <span className="grid h-11 w-11 place-items-center rounded-xl border border-accent/30 bg-accent/10 text-emerald-300">
+    <span className="grid h-11 w-11 place-items-center rounded-xl border border-accent/30 bg-accent/10 text-link">
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -137,7 +137,7 @@ export function StepGlyph({ name }: { name: Glifo }) {
       viewBox="0 0 132 64"
       fill="none"
       aria-hidden
-      className="h-16 w-[132px] text-emerald-300"
+      className="h-16 w-[132px] text-link"
     >
       {name === "canales" && (
         <>

@@ -32,6 +32,47 @@
   --color-hairline-strong: rgba(255, 255, 255, 0.18);
   --color-field: rgba(255, 255, 255, 0.4);
 
+  /* ---------------------------------------------------------------
+   * Papeles, no colores.
+   *
+   * Estos tokens dicen QUÉ hace cada color, y por eso son los que
+   * cambian entre el tema oscuro y el claro. Los de arriba son la
+   * identidad y no se tocan: navy sigue siendo navy en los dos.
+   *
+   * Sin esta capa, un tema claro obliga a repasar componente por
+   * componente buscando los `text-white` y los `bg-white/5`, que son
+   * justo los que no pueden cambiar solos.
+   * ------------------------------------------------------------- */
+  --color-page: var(--color-abyss);           /* el fondo de la página */
+  --color-strong: #ffffff;                    /* titulares, un paso sobre ink */
+  --color-raise: rgba(255, 255, 255, 0.05);   /* superficie apenas levantada */
+  --color-raise-2: rgba(255, 255, 255, 0.09); /* la misma, un paso más */
+
+  /* Pieza pequeña DENTRO de una tarjeta: un nodo del diagrama, una fila
+     de una tabla de ejemplo. En oscuro es más clara que el fondo; en
+     claro, más oscura que el blanco de la tarjeta. La escalera va en
+     sentidos opuestos y por eso no puede ser el mismo token que raise. */
+  --color-inset: var(--color-navy-900);
+
+  /* El nodo encendido del diagrama. En oscuro sube a navy y destaca por ser
+     más claro; en claro, navy sería un bloque negro en medio de un dibujo
+     claro, así que destaca con un velo del verde de marca. */
+  --color-destacado: var(--color-navy);
+  --color-link: #6ee7b7;                      /* verde legible sobre el fondo */
+
+  /* El resplandor de detrás del titular. En oscuro es navy casi sólido y
+     levanta el fondo; en claro, el mismo navy a ese peso es una mancha gris
+     detrás del texto, así que baja a un velo. */
+  --halo-hero: rgba(27, 42, 74, 0.95);
+
+  /* El relleno del botón principal y el texto que va encima. En oscuro
+     el verde de marca con texto abyss da 5.3:1; en claro ese mismo
+     verde con texto blanco daría 3.3:1 y reprueba, así que el relleno
+     baja a accent-600. El verde de marca sigue intacto para trazos,
+     puntos y bordes, donde 3:1 basta. */
+  --color-accent-solid: var(--color-accent);
+  --color-on-accent: var(--color-abyss);
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
@@ -43,6 +84,73 @@
   html {
     scroll-behavior: smooth;
   }
+}
+
+/* -----------------------------------------------------------------
+ * Tema claro.
+ *
+ * No es el oscuro invertido: la escalera cambia de sentido. En oscuro
+ * las superficies SUBEN desde el fondo (abyss → navy-900 → navy); en
+ * claro bajan desde el blanco, y una tarjeta blanca sobre un fondo
+ * ligeramente azulado se lee sin necesidad de bordes fuertes.
+ *
+ * El fondo es navy-50, que ya estaba en la identidad: sobre blanco puro
+ * las tarjetas se quedan sin nada contra lo que destacar.
+ * --------------------------------------------------------------- */
+/* Una isla que se queda oscura dentro de una página clara: la maqueta del
+   admin —que es oscuro de verdad— y el bloque de código. Repiten los valores
+   del tema oscuro para que lo de dentro siga siendo legible sin que cada
+   pieza tenga que llevar su color escrito a mano. */
+[data-tema="oscuro"] {
+  color-scheme: dark;
+
+  --color-page: var(--color-abyss);
+  --color-ink: #eef2f8;
+  --color-muted: #9aa6bd;
+  --color-strong: #ffffff;
+  --color-raise: rgba(255, 255, 255, 0.05);
+  --color-raise-2: rgba(255, 255, 255, 0.09);
+  --color-inset: var(--color-navy-900);
+
+  /* El nodo encendido del diagrama. En oscuro sube a navy y destaca por ser
+     más claro; en claro, navy sería un bloque negro en medio de un dibujo
+     claro, así que destaca con un velo del verde de marca. */
+  --color-destacado: var(--color-navy);
+  --color-hairline: rgba(255, 255, 255, 0.09);
+  --color-hairline-strong: rgba(255, 255, 255, 0.18);
+  --color-field: rgba(255, 255, 255, 0.4);
+  --color-link: #6ee7b7;
+  --color-accent-solid: var(--color-accent);
+  --color-on-accent: var(--color-abyss);
+  --halo-hero: rgba(27, 42, 74, 0.95);
+}
+
+[data-tema="claro"] {
+  color-scheme: light;
+
+  --color-page: #f4f5f9; /* navy-50 */
+  --color-ink: #16233d;
+  --color-muted: #5a6780;
+  --color-strong: #0d1526;
+
+  /* Las superficies dejan de ser blanco translúcido y pasan a blanco
+     sólido: sobre un fondo claro, un blanco al 5% no se ve. */
+  --color-raise: #ffffff;
+  --color-raise-2: rgba(18, 28, 51, 0.05);
+  --color-inset: #f4f5f9;
+  --color-destacado: rgba(15, 157, 110, 0.1);
+
+  --color-hairline: rgba(18, 28, 51, 0.1);
+  --color-hairline-strong: rgba(18, 28, 51, 0.22);
+  --color-field: rgba(18, 28, 51, 0.45);
+
+  /* accent-600 da 4.6:1 sobre el fondo de la página, pero las secciones
+     alternas lo bajan a 4.17 y reprueba. Un paso más oscuro aguanta las dos. */
+  --color-link: #0a7350;
+  --color-accent-solid: var(--color-accent-600);
+  --color-on-accent: #ffffff;
+
+  --halo-hero: rgba(27, 42, 74, 0.07);
 }
 
 html,
@@ -57,7 +165,7 @@ html {
 }
 
 body {
-  background: var(--color-abyss);
+  background: var(--color-page);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -68,7 +176,7 @@ body {
  * --------------------------------------------------------------- */
 ::selection {
   background: rgba(15, 157, 110, 0.35);
-  color: #ffffff;
+  color: var(--color-strong);
 }
 
 /* El verde de marca da 5.3:1 sobre el fondo: se ve y es de la casa. */
@@ -86,6 +194,23 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Las dos versiones del logotipo conviven y el tema esconde la que sobra. */
+.marca-oscura {
+  display: none;
+}
+[data-tema="claro"] .marca-clara {
+  display: none;
+}
+[data-tema="claro"] .marca-oscura {
+  display: block;
+}
+[data-tema="oscuro"] .marca-clara {
+  display: block;
+}
+[data-tema="oscuro"] .marca-oscura {
+  display: none;
+}
+
 /* Barras de scroll internas (tabla, bloque de código) a tono. */
 .thin-scroll {
   scrollbar-width: thin;
@@ -95,7 +220,7 @@ body {
   height: 8px;
 }
 .thin-scroll::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.22);
+  background: var(--color-hairline-strong);
   border-radius: 999px;
 }
 

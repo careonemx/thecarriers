@@ -15,7 +15,7 @@ import {
 /* ---------- El problema ---------- */
 export function Problem() {
   return (
-    <section className="border-t border-hairline bg-navy-900/35">
+    <section className="border-t border-hairline bg-raise-2">
       <div className="shell py-20 md:py-28">
         <SectionTitle
           eyebrow="El problema"
@@ -25,10 +25,10 @@ export function Problem() {
           {pains.map((p, i) => (
             <Reveal key={p.t} delay={i * 70}>
               <div className={`${card} h-full`}>
-                <span className="tabular font-mono text-xs text-emerald-300">
+                <span className="tabular font-mono text-xs text-link">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-4 text-base font-semibold text-white">{p.t}</h3>
+                <h3 className="mt-4 text-base font-semibold text-strong">{p.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{p.d}</p>
               </div>
             </Reveal>
@@ -64,8 +64,8 @@ export function HowItWorks() {
             <Reveal key={s.n} delay={i * 90}>
               <li className={`${card} h-full`}>
                 <StepGlyph name={s.glifo} />
-                <p className="tabular mt-5 font-mono text-xs text-emerald-300">{s.n}</p>
-                <h3 className="mt-2 text-lg font-semibold text-white">{s.t}</h3>
+                <p className="tabular mt-5 font-mono text-xs text-link">{s.n}</p>
+                <h3 className="mt-2 text-lg font-semibold text-strong">{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
               </li>
             </Reveal>
@@ -79,7 +79,7 @@ export function HowItWorks() {
 /* ---------- Integraciones ---------- */
 export function Integrations() {
   return (
-    <section id="integraciones" className="scroll-mt-20 border-t border-hairline bg-navy-900/35">
+    <section id="integraciones" className="scroll-mt-20 border-t border-hairline bg-raise-2">
       <div className="shell py-20 md:py-28">
         <SectionTitle
           eyebrow="Compatibilidad"
@@ -112,7 +112,7 @@ export function Integrations() {
           ¿Usas otro canal u otra paquetería?{" "}
           <a
             href="#acceso"
-            className="font-medium text-emerald-300 underline underline-offset-4 transition-colors duration-200 hover:text-white"
+            className="font-medium text-link underline underline-offset-4 transition-colors duration-200 hover:text-strong"
           >
             Cuéntanos cuál necesitas.
           </a>
@@ -134,7 +134,7 @@ function Grupo({
   columnas?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-hairline bg-navy-900/70 p-6">
+    <div className="rounded-2xl border border-hairline bg-raise p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
         <p className="text-xs font-semibold uppercase tracking-[0.16em] text-muted">{titulo}</p>
         {nota && <p className="text-xs text-muted">{nota}</p>}
@@ -143,12 +143,12 @@ function Grupo({
         {items.map((it) => (
           <li
             key={it.nombre}
-            className="flex items-center gap-3 rounded-xl border border-hairline bg-white/4 px-3 py-3 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-accent/40 hover:bg-white/8"
+            className="flex items-center gap-3 rounded-xl border border-hairline bg-raise px-3 py-3 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-accent/40 hover:bg-raise-2"
           >
             {/* Monograma tipográfico nuestro, no el logotipo de la marca. */}
             <span
               aria-hidden
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-hairline bg-navy-900 font-mono text-[11px] text-muted"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-hairline bg-raise-2 font-mono text-[11px] text-ink"
             >
               {it.sigla}
             </span>
@@ -174,7 +174,7 @@ export function Platform() {
             <Reveal key={m.t} delay={(i % 3) * 80}>
               <div className={`${card} h-full`}>
                 <ModuleIcon name={m.icono} />
-                <h3 className="mt-5 text-base font-semibold text-white">{m.t}</h3>
+                <h3 className="mt-5 text-base font-semibold text-strong">{m.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{m.d}</p>
               </div>
             </Reveal>
@@ -184,7 +184,7 @@ export function Platform() {
         <div className="mt-10 text-center">
           <a
             href="#acceso"
-            className="group inline-flex items-center gap-2 text-sm font-semibold text-emerald-300 transition-colors duration-200 hover:text-white"
+            className="group inline-flex items-center gap-2 text-sm font-semibold text-link transition-colors duration-200 hover:text-strong"
           >
             Conocer la plataforma
             <span
@@ -203,14 +203,14 @@ export function Platform() {
 /* ---------- Para quién ---------- */
 export function Audience() {
   return (
-    <section id="para-quien" className="scroll-mt-20 border-t border-hairline bg-navy-900/35">
+    <section id="para-quien" className="scroll-mt-20 border-t border-hairline bg-raise-2">
       <div className="shell py-20 md:py-28">
         <SectionTitle eyebrow="Para quién" title="Para quién está hecho" />
         <div className="mt-14 grid gap-4 md:grid-cols-3">
           {audiences.map((a, i) => (
             <Reveal key={a.t} delay={i * 80}>
               <div className={`${card} h-full`}>
-                <h3 className="text-lg font-semibold text-white">{a.t}</h3>
+                <h3 className="text-lg font-semibold text-strong">{a.t}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">{a.d}</p>
               </div>
             </Reveal>

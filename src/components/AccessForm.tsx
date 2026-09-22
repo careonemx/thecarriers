@@ -50,7 +50,7 @@ export function AccessForm() {
   if (estado === "ok") {
     return (
       <div className="flex h-full flex-col justify-center rounded-2xl border border-accent/35 bg-accent/10 p-8 text-center">
-        <p className="text-lg font-semibold text-white">Recibimos tu solicitud</p>
+        <p className="text-lg font-semibold text-strong">Recibimos tu solicitud</p>
         <p className="mt-3 text-sm text-muted">
           Te escribimos en menos de 48 horas hábiles para agendar una llamada y ver qué canales y
           paqueterías conectamos contigo.
@@ -72,7 +72,7 @@ export function AccessForm() {
         <select
           name="envios_por_mes"
           defaultValue={volumenes[0]}
-          className="rounded-lg border border-field bg-white/5 px-3 py-2.5 text-ink [&>option]:bg-navy-900"
+          className="rounded-lg border border-field bg-raise px-3 py-2.5 text-ink [&>option]:bg-page"
         >
           {volumenes.map((v) => (
             <option key={v}>{v}</option>
@@ -141,7 +141,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="rounded-lg border border-field bg-white/5 px-3 py-2.5 text-ink placeholder:text-muted"
+        className="rounded-lg border border-field bg-raise px-3 py-2.5 text-ink placeholder:text-muted"
       />
     </label>
   );

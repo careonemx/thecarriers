@@ -45,8 +45,8 @@ export function Api() {
       <div className="shell py-20 md:py-28">
         <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">API</p>
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-[2.75rem] md:leading-[1.08]">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-link">API</p>
+            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-strong md:text-[2.75rem] md:leading-[1.08]">
               Una API. Todos tus carriers.
             </h2>
             <p className="mt-5 max-w-[58ch] text-base text-muted md:text-lg">
@@ -60,7 +60,7 @@ export function Api() {
           </div>
 
           <div>
-            <div className="overflow-hidden rounded-2xl border border-hairline bg-abyss shadow-[0_50px_110px_-60px_rgba(0,0,0,.95)]">
+            <div data-tema="oscuro" className="overflow-hidden rounded-2xl border border-hairline bg-page shadow-[0_50px_110px_-60px_rgba(0,0,0,.95)]">
               <div className="flex flex-wrap items-center gap-2 border-b border-hairline bg-white/4 px-4 py-3">
                 <span className="mr-1 text-xs text-muted">Carrier</span>
                 {apiSwap.map((s, idx) => (
@@ -113,9 +113,9 @@ export function Api() {
           {apiBeneficios.map((b) => (
             <li
               key={b.t}
-              className="rounded-2xl border border-hairline bg-navy-900/70 p-6 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong"
+              className="rounded-2xl border border-hairline bg-raise p-6 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong"
             >
-              <h3 className="text-base font-semibold text-white">{b.t}</h3>
+              <h3 className="text-base font-semibold text-strong">{b.t}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted">{b.d}</p>
             </li>
           ))}

@@ -88,12 +88,16 @@ desarrollo.
 
 ## Accesibilidad
 
-WCAG 2.1 AA, verificado midiendo el render (284 textos, 0 fallos). Restricciones de la
-paleta sobre el fondo oscuro:
+WCAG 2.1 AA, verificado midiendo el render **en los dos temas** (282 textos, 0 fallos).
+Restricciones de la paleta:
 
-- **Texto blanco sobre el acento sólido da 3.46:1 y reprueba.** Los botones verdes
-  llevan texto `abyss` (5.32:1), y su hover *aclara*; si oscureciera a `accent-600`,
-  el texto oscuro se quedaría sin contraste.
+- **Texto blanco sobre el acento sólido da 3.46:1 y reprueba.** En oscuro los botones
+  verdes llevan texto `abyss` (5.32:1) y su hover *aclara*. En claro no cabe texto
+  oscuro sobre verde, así que el relleno baja a `accent-600` y el texto va blanco
+  (4.7:1). Es lo que hace `--color-accent-solid`.
+- **El verde de marca no sirve como texto sobre fondo claro.** `accent-600` da 4.6:1
+  sobre la página pero 4.17:1 sobre las secciones alternas, así que `--color-link`
+  usa un paso más oscuro (`#0A7350`).
 - `--color-hairline` es decorativo y no sirve como único borde de un control. Los
   campos de formulario usan `--color-field` (3.41:1), que cumple el mínimo de 3:1.
 - `white/50` es el piso para texto sobre el fondo. Por debajo, reprueba.
@@ -103,9 +107,32 @@ con scroll horizontal son alcanzables con teclado.
 
 ## Marca
 
-Navy `#1B2A4A`, acento `#0F9D6E`, Inter. El modo oscuro no introdujo colores nuevos: la
-escalera es `abyss #0B1220` (página) → `navy-900 #121C33` (tarjeta) → `navy #1B2A4A`
-(elevada), todo el mismo tono.
+Navy `#1B2A4A`, acento `#0F9D6E`, Inter. Ninguno de los dos temas introduce colores de
+marca nuevos.
+
+## Temas
+
+El sitio sirve dos temas con la misma identidad. Lo que cambia son los tokens de
+**papel** —`--color-page`, `--color-strong`, `--color-raise`, `--color-inset`,
+`--color-link`, `--color-accent-solid`, `--color-on-accent`— y no los de identidad.
+Un componente que escribe `text-white` o `bg-white/5` a mano se queda fuera del
+sistema: esos son justo los que no pueden cambiar solos.
+
+La escalera de superficies va en sentidos opuestos, y por eso `raise` e `inset` son
+tokens distintos:
+
+- oscuro: `abyss` (página) → `navy-900` (tarjeta) → `navy` (elevada)
+- claro: `navy-50` (página) → blanco (tarjeta) → `navy-50` otra vez (pieza dentro)
+
+**Islas oscuras.** El bloque de código y la maqueta del admin llevan
+`data-tema="oscuro"` y se quedan oscuros dentro de la página clara: no son la página,
+son una foto de algo que es oscuro de verdad. El atributo les devuelve los tokens
+oscuros, así que lo de dentro sigue siendo legible sin escribir ningún color a mano.
+
+El tema vive en `localStorage` bajo `tc-tema` y lo aplica un script en línea del
+layout, antes del primer pintado. El sitio se exporta estático: el servidor no puede
+leer la preferencia, y dejárselo a React haría que la página se viera un instante en
+oscuro antes de saltar a claro.
 
 ## Tipografía
 

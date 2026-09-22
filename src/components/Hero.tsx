@@ -8,7 +8,7 @@ export function Hero() {
       {/* Un solo resplandor, detrás del titular. Nada de tramas de fondo. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] bg-[radial-gradient(60%_58%_at_50%_0%,rgba(27,42,74,.95),transparent_72%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[640px] bg-[radial-gradient(60%_58%_at_50%_0%,var(--halo-hero),transparent_72%)]"
       />
       <div
         aria-hidden
@@ -18,12 +18,12 @@ export function Hero() {
       <div className="shell pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="mx-auto max-w-3xl text-center">
           {/* En lg+ este indicador vive en la barra superior. */}
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-white/5 px-3 py-1 text-xs font-medium text-muted lg:hidden">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-raise px-3 py-1 text-xs font-medium text-muted lg:hidden">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             {hero.eyebrow}
           </p>
 
-          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-white md:text-6xl xl:text-7xl">
+          <h1 className="text-4xl font-semibold leading-[1.05] tracking-tight text-strong md:text-6xl xl:text-7xl">
             {hero.h1[0]}
             <br />
             <span className="text-muted">{hero.h1[1]}</span>
@@ -42,7 +42,7 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="mt-7 text-sm font-medium text-emerald-300">{hero.claim}</p>
+          <p className="mt-7 text-sm font-medium text-link">{hero.claim}</p>
           <p className="mx-auto mt-3 max-w-xl text-xs text-muted">{hero.nota}</p>
         </div>
 

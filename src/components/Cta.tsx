@@ -4,17 +4,17 @@ export function Cta() {
   return (
     <section id="acceso" className="scroll-mt-20 border-t border-hairline">
       <div className="shell py-20 md:py-28">
-        <div className="relative overflow-hidden rounded-3xl border border-hairline bg-navy-900/70 p-8 md:p-12">
+        <div className="relative overflow-hidden rounded-3xl border border-hairline bg-raise p-8 md:p-12">
           <div
             aria-hidden
             className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.22),transparent_68%)] blur-2xl"
           />
           <div className="relative grid gap-12 md:grid-cols-2">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-emerald-300">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-link">
                 Acceso anticipado
               </p>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white md:text-4xl">
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-strong md:text-4xl">
                 Solicita acceso anticipado
               </h2>
               <p className="mt-5 max-w-[56ch] text-muted md:text-lg">
