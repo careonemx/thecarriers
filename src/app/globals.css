@@ -43,16 +43,21 @@
    * componente buscando los `text-white` y los `bg-white/5`, que son
    * justo los que no pueden cambiar solos.
    * ------------------------------------------------------------- */
-  --color-page: var(--color-abyss);           /* el fondo de la página */
-  --color-strong: #ffffff;                    /* titulares, un paso sobre ink */
-  --color-raise: rgba(255, 255, 255, 0.05);   /* superficie apenas levantada */
-  --color-raise-2: rgba(255, 255, 255, 0.09); /* la misma, un paso más */
+  --color-page: var(--color-abyss);        /* el fondo de la página */
+  --color-strong: #ffffff;                 /* titulares, un paso sobre ink */
+  --color-banda: rgba(18, 28, 51, 0.35);   /* sección alterna, para dar ritmo */
+  --color-raise: rgba(18, 28, 51, 0.7);    /* tarjeta */
 
-  /* Pieza pequeña DENTRO de una tarjeta: un nodo del diagrama, una fila
-     de una tabla de ejemplo. En oscuro es más clara que el fondo; en
-     claro, más oscura que el blanco de la tarjeta. La escalera va en
-     sentidos opuestos y por eso no puede ser el mismo token que raise. */
+  /* Pieza pequeña DENTRO de una tarjeta: un nodo del diagrama, una fila de
+     una tabla de ejemplo. En oscuro es MÁS clara que el fondo; en claro, más
+     oscura que el blanco de la tarjeta. La escalera va en sentidos opuestos,
+     y por eso no puede ser el mismo token que la tarjeta. */
   --color-inset: var(--color-navy-900);
+
+  /* Controles: el botón fantasma, un campo, una pastilla. No son tarjetas y
+     en oscuro no llevan tinte navy sino un blanco muy bajo. */
+  --color-control: rgba(255, 255, 255, 0.05);
+  --color-control-fuerte: rgba(255, 255, 255, 0.1);
 
   /* El nodo encendido del diagrama. En oscuro sube a navy y destaca por ser
      más claro; en claro, navy sería un bloque negro en medio de un dibujo
@@ -94,8 +99,10 @@
  * claro bajan desde el blanco, y una tarjeta blanca sobre un fondo
  * ligeramente azulado se lee sin necesidad de bordes fuertes.
  *
- * El fondo es navy-50, que ya estaba en la identidad: sobre blanco puro
- * las tarjetas se quedan sin nada contra lo que destacar.
+ * La página es blanca y las tarjetas también. Lo que las separa no es el
+ * color —no queda nada más claro que el blanco— sino una sombra muy abierta
+ * y un borde. El ritmo entre secciones lo da navy-50, que ya estaba en la
+ * identidad, en las bandas alternas.
  * --------------------------------------------------------------- */
 /* Una isla que se queda oscura dentro de una página clara: la maqueta del
    admin —que es oscuro de verdad— y el bloque de código. Repiten los valores
@@ -108,9 +115,11 @@
   --color-ink: #eef2f8;
   --color-muted: #9aa6bd;
   --color-strong: #ffffff;
-  --color-raise: rgba(255, 255, 255, 0.05);
-  --color-raise-2: rgba(255, 255, 255, 0.09);
+  --color-banda: rgba(18, 28, 51, 0.35);
+  --color-raise: rgba(18, 28, 51, 0.7);
   --color-inset: var(--color-navy-900);
+  --color-control: rgba(255, 255, 255, 0.05);
+  --color-control-fuerte: rgba(255, 255, 255, 0.1);
 
   /* El nodo encendido del diagrama. En oscuro sube a navy y destaca por ser
      más claro; en claro, navy sería un bloque negro en medio de un dibujo
@@ -123,24 +132,29 @@
   --color-accent-solid: var(--color-accent);
   --color-on-accent: var(--color-abyss);
   --halo-hero: rgba(27, 42, 74, 0.95);
+  --sombra-tarjeta: none;
+  --sombra-tarjeta-hover: 0 24px 60px -40px rgba(15, 157, 110, 0.8);
 }
 
 [data-tema="claro"] {
   color-scheme: light;
 
-  --color-page: #f4f5f9; /* navy-50 */
+  --color-page: #ffffff;
   --color-ink: #16233d;
   --color-muted: #5a6780;
   --color-strong: #0d1526;
 
-  /* Las superficies dejan de ser blanco translúcido y pasan a blanco
-     sólido: sobre un fondo claro, un blanco al 5% no se ve. */
+  /* Las superficies dejan de ser translúcidas y pasan a blanco sólido: sobre
+     un fondo claro, un blanco al 5% no se ve. La banda alterna y las piezas
+     de dentro usan navy-50, que ya estaba en la identidad. */
+  --color-banda: #f4f5f9;
   --color-raise: #ffffff;
-  --color-raise-2: rgba(18, 28, 51, 0.05);
+  --color-control: #ffffff;
+  --color-control-fuerte: #f4f5f9;
   --color-inset: #f4f5f9;
   --color-destacado: rgba(15, 157, 110, 0.1);
 
-  --color-hairline: rgba(18, 28, 51, 0.1);
+  --color-hairline: rgba(18, 28, 51, 0.12);
   --color-hairline-strong: rgba(18, 28, 51, 0.22);
   --color-field: rgba(18, 28, 51, 0.45);
 
@@ -151,6 +165,12 @@
   --color-on-accent: #ffffff;
 
   --halo-hero: rgba(27, 42, 74, 0.07);
+
+  /* Sin diferencia de fondo, la tarjeta se separa de la página con una sombra
+     muy abierta y un borde algo más presente. La del hover no es un halo
+     verde: sobre blanco un brillo de color se lee como un error de impresión. */
+  --sombra-tarjeta: 0 1px 2px rgba(18, 28, 51, 0.04), 0 12px 32px -20px rgba(18, 28, 51, 0.14);
+  --sombra-tarjeta-hover: 0 1px 2px rgba(18, 28, 51, 0.05), 0 22px 48px -24px rgba(18, 28, 51, 0.2);
 }
 
 html,

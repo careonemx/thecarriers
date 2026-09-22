@@ -236,7 +236,7 @@ function Sigla({ texto, encendido = false }: { texto: string; encendido?: boolea
       className={`grid h-7 w-7 shrink-0 place-items-center rounded-md border font-mono text-[10px] transition-colors duration-300 ease-[var(--ease-signal)] ${
         encendido
           ? "border-accent/50 bg-accent/20 text-link"
-          : "border-hairline bg-raise text-ink"
+          : "border-hairline bg-control text-ink"
       }`}
     >
       {texto}
@@ -383,9 +383,9 @@ export function ConvergenceDiagram() {
       </div>
 
       <div className="mt-6 grid gap-3 border-t border-hairline pt-5 text-center text-[11px] text-muted sm:grid-cols-3">
-        <span className="rounded-md bg-raise-2 px-2 py-1.5">Tus canales de venta</span>
-        <span className="rounded-md bg-raise-2 px-2 py-1.5">Tu equipo, en una pantalla</span>
-        <span className="rounded-md bg-raise-2 px-2 py-1.5">{rotuloDestinos}</span>
+        <span className="rounded-md bg-control px-2 py-1.5">Tus canales de venta</span>
+        <span className="rounded-md bg-control px-2 py-1.5">Tu equipo, en una pantalla</span>
+        <span className="rounded-md bg-control px-2 py-1.5">{rotuloDestinos}</span>
       </div>
     </div>
   );

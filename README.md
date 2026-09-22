@@ -118,11 +118,27 @@ El sitio sirve dos temas con la misma identidad. Lo que cambia son los tokens de
 Un componente que escribe `text-white` o `bg-white/5` a mano se queda fuera del
 sistema: esos son justo los que no pueden cambiar solos.
 
-La escalera de superficies va en sentidos opuestos, y por eso `raise` e `inset` son
-tokens distintos:
+El tema oscuro tenía seis superficies distintas y cada una conserva su valor: un tema
+nuevo no puede cambiar el que ya estaba.
 
-- oscuro: `abyss` (página) → `navy-900` (tarjeta) → `navy` (elevada)
-- claro: `navy-50` (página) → blanco (tarjeta) → `navy-50` otra vez (pieza dentro)
+| Token | Papel | Oscuro | Claro |
+|---|---|---|---|
+| `--color-page` | la página | `abyss` | blanco |
+| `--color-banda` | sección alterna | `navy-900/35` | `navy-50` |
+| `--color-raise` | tarjeta | `navy-900/70` | blanco |
+| `--color-inset` | pieza dentro de una tarjeta | `navy-900` | `navy-50` |
+| `--color-control` | botón fantasma, campo, pastilla | `white/5` | blanco |
+| `--color-control-fuerte` | su estado activo | `white/10` | `navy-50` |
+
+**La escalera va en sentidos opuestos** y por eso `raise` e `inset` no pueden ser el
+mismo token: en oscuro una pieza dentro de una tarjeta es más CLARA que ella; en claro,
+más oscura.
+
+**Sobre blanco no hay nada más claro que el blanco**, así que la tarjeta no se separa
+de la página por color sino por `--sombra-tarjeta` y un borde algo más presente. El
+ritmo entre secciones lo da la banda `navy-50`. En oscuro la sombra es `none` y el
+hover sí lleva un halo verde; sobre blanco un brillo de color se lee como un error de
+impresión.
 
 **Islas oscuras.** El bloque de código y la maqueta del admin llevan
 `data-tema="oscuro"` y se quedan oscuros dentro de la página clara: no son la página,

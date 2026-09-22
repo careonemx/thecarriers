@@ -72,7 +72,7 @@ export function AccessForm() {
         <select
           name="envios_por_mes"
           defaultValue={volumenes[0]}
-          className="rounded-lg border border-field bg-raise px-3 py-2.5 text-ink [&>option]:bg-page"
+          className="rounded-lg border border-field bg-control px-3 py-2.5 text-ink [&>option]:bg-page"
         >
           {volumenes.map((v) => (
             <option key={v}>{v}</option>
@@ -141,7 +141,7 @@ function Field({
         required={required}
         placeholder={placeholder}
         autoComplete={autoComplete}
-        className="rounded-lg border border-field bg-raise px-3 py-2.5 text-ink placeholder:text-muted"
+        className="rounded-lg border border-field bg-control px-3 py-2.5 text-ink placeholder:text-muted"
       />
     </label>
   );

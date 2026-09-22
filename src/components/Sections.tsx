@@ -15,7 +15,7 @@ import {
 /* ---------- El problema ---------- */
 export function Problem() {
   return (
-    <section className="border-t border-hairline bg-raise-2">
+    <section className="border-t border-hairline bg-banda">
       <div className="shell py-20 md:py-28">
         <SectionTitle
           eyebrow="El problema"
@@ -79,7 +79,7 @@ export function HowItWorks() {
 /* ---------- Integraciones ---------- */
 export function Integrations() {
   return (
-    <section id="integraciones" className="scroll-mt-20 border-t border-hairline bg-raise-2">
+    <section id="integraciones" className="scroll-mt-20 border-t border-hairline bg-banda">
       <div className="shell py-20 md:py-28">
         <SectionTitle
           eyebrow="Compatibilidad"
@@ -143,12 +143,12 @@ function Grupo({
         {items.map((it) => (
           <li
             key={it.nombre}
-            className="flex items-center gap-3 rounded-xl border border-hairline bg-raise px-3 py-3 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-accent/40 hover:bg-raise-2"
+            className="flex items-center gap-3 rounded-xl border border-hairline bg-control px-3 py-3 transition-colors duration-300 ease-[var(--ease-signal)] hover:border-accent/40 hover:bg-banda"
           >
             {/* Monograma tipográfico nuestro, no el logotipo de la marca. */}
             <span
               aria-hidden
-              className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-hairline bg-raise-2 font-mono text-[11px] text-ink"
+              className="grid h-8 w-8 shrink-0 place-items-center rounded-md border border-hairline bg-inset font-mono text-[11px] text-ink"
             >
               {it.sigla}
             </span>
@@ -203,7 +203,7 @@ export function Platform() {
 /* ---------- Para quién ---------- */
 export function Audience() {
   return (
-    <section id="para-quien" className="scroll-mt-20 border-t border-hairline bg-raise-2">
+    <section id="para-quien" className="scroll-mt-20 border-t border-hairline bg-banda">
       <div className="shell py-20 md:py-28">
         <SectionTitle eyebrow="Para quién" title="Para quién está hecho" />
         <div className="mt-14 grid gap-4 md:grid-cols-3">

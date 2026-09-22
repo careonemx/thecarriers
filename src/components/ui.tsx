@@ -7,7 +7,7 @@ import type { Glifo, Icono } from "@/lib/content";
 
 /** Tarjeta base. El hover levanta el borde, no el contenido. */
 export const card =
-  "rounded-2xl border border-hairline bg-raise p-6 transition-[border-color,background-color,box-shadow] duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-raise hover:shadow-[0_24px_60px_-40px_rgba(15,157,110,.8)]";
+  "rounded-2xl border border-hairline bg-raise p-6 shadow-[var(--sombra-tarjeta)] transition-[border-color,background-color,box-shadow] duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-raise hover:shadow-[var(--sombra-tarjeta-hover)]";
 
 /* Texto oscuro sobre el verde de marca: blanco sobre accent da 3.46:1 y
    reprueba AA; abyss sobre accent da 5.32:1. El hover aclara en vez de
@@ -16,7 +16,7 @@ export const btnPrimario =
   "inline-flex items-center justify-center whitespace-nowrap rounded-lg bg-accent-solid px-5 py-3 text-sm font-semibold text-on-accent shadow-[0_18px_40px_-22px_rgba(15,157,110,.9)] transition-[filter,box-shadow] duration-200 ease-[var(--ease-signal)] hover:brightness-110";
 
 export const btnFantasma =
-  "inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-hairline-strong bg-raise px-5 py-3 text-sm font-semibold text-ink transition-colors duration-200 ease-[var(--ease-signal)] hover:border-accent/60 hover:bg-raise-2";
+  "inline-flex items-center justify-center whitespace-nowrap rounded-lg border border-hairline-strong bg-control px-5 py-3 text-sm font-semibold text-ink transition-colors duration-200 ease-[var(--ease-signal)] hover:border-accent/60 hover:bg-control-fuerte";
 
 export function SectionTitle({
   eyebrow,

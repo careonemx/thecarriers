@@ -18,7 +18,7 @@ export function Hero() {
       <div className="shell pb-20 pt-16 md:pb-28 md:pt-24">
         <div className="mx-auto max-w-3xl text-center">
           {/* En lg+ este indicador vive en la barra superior. */}
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-raise px-3 py-1 text-xs font-medium text-muted lg:hidden">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-hairline bg-control px-3 py-1 text-xs font-medium text-muted lg:hidden">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             {hero.eyebrow}
           </p>
