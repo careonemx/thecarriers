@@ -97,7 +97,7 @@ export function ProductView() {
                         ))}
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-[rgba(255,255,255,.07)]">
+                    <tbody className="divide-y divide-hairline">
                       {demoRows.map((r) => (
                         <tr
                           key={r.guia}

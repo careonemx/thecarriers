@@ -65,6 +65,13 @@
   --color-destacado: var(--color-navy);
   --color-link: #6ee7b7;                      /* verde legible sobre el fondo */
 
+  /* El trazo de los diagramas: la línea por la que corre el pulso verde. Es
+     el token que más se nota si falta, porque son los dibujos que explican de
+     qué va el producto, y sin él quedan pulsos verdes flotando en el vacío. */
+  --trazo: rgba(255, 255, 255, 0.14);
+  --trazo-fuerte: rgba(255, 255, 255, 0.16);
+
+
   /* El resplandor de detrás del titular. En oscuro es navy casi sólido y
      levanta el fondo; en claro, el mismo navy a ese peso es una mancha gris
      detrás del texto, así que baja a un velo. */
@@ -125,6 +132,8 @@
      más claro; en claro, navy sería un bloque negro en medio de un dibujo
      claro, así que destaca con un velo del verde de marca. */
   --color-destacado: var(--color-navy);
+  --trazo: rgba(255, 255, 255, 0.14);
+  --trazo-fuerte: rgba(255, 255, 255, 0.16);
   --color-hairline: rgba(255, 255, 255, 0.09);
   --color-hairline-strong: rgba(255, 255, 255, 0.18);
   --color-field: rgba(255, 255, 255, 0.4);
@@ -151,6 +160,11 @@
   --color-raise: #ffffff;
   --color-control: #ffffff;
   --color-control-fuerte: #f4f5f9;
+
+  /* Algo más marcado que su equivalente oscuro: un trazo fino se pierde antes
+     sobre blanco que sobre negro. */
+  --trazo: rgba(18, 28, 51, 0.16);
+  --trazo-fuerte: rgba(18, 28, 51, 0.2);
   --color-inset: #f4f5f9;
   --color-destacado: rgba(15, 157, 110, 0.1);
 
@@ -235,7 +249,7 @@ body {
 /* Barras de scroll internas (tabla, bloque de código) a tono. */
 .thin-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.22) transparent;
+  scrollbar-color: var(--color-hairline-strong) transparent;
 }
 .thin-scroll::-webkit-scrollbar {
   height: 8px;

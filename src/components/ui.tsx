@@ -110,7 +110,7 @@ export function ModuleIcon({ name }: { name: Icono }) {
  * Cada uno cuenta su propio paso con la misma gramática del sitio:
  * trazo tenue de fondo y un pulso verde recorriéndolo.
  * --------------------------------------------------------------- */
-const tenue = "rgba(255,255,255,.16)";
+const tenue = "var(--trazo-fuerte)";
 
 function Trayecto({ d, dur, delay = 0 }: { d: string; dur: number; delay?: number }) {
   return (

@@ -72,7 +72,7 @@ function Wires({
             <path
               d={d}
               strokeWidth="1.5"
-              stroke={encendido ? "rgba(15,157,110,.85)" : "rgba(255,255,255,.14)"}
+              stroke={encendido ? "rgba(15,157,110,.85)" : "var(--trazo)"}
               className="transition-[stroke] duration-300 ease-[var(--ease-signal)]"
             />
             {/* El pedido viajando: entra por los canales, sale por las paqueterías. */}
@@ -316,7 +316,7 @@ function Flechas({ dir }: { dir: "in" | "out" }) {
           <g key={x}>
             <path
               d={d}
-              stroke="rgba(255,255,255,.14)"
+              stroke="var(--trazo)"
               strokeWidth="1.5"
               vectorEffect="non-scaling-stroke"
             />
@@ -440,7 +440,7 @@ export function ApiFlow() {
 function Bajada() {
   return (
     <svg viewBox="0 0 2 40" preserveAspectRatio="none" fill="none" aria-hidden className="h-10 w-px">
-      <path d="M1 0 V40" stroke="rgba(255,255,255,.16)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
+      <path d="M1 0 V40" stroke="var(--trazo-fuerte)" strokeWidth="1.5" vectorEffect="non-scaling-stroke" />
       <path
         className="pulse"
         style={{ "--pulse-dur": "2.4s" } as CSSProperties}
@@ -472,7 +472,7 @@ function Abanico() {
           <g key={i}>
             <path
               d={d}
-              stroke="rgba(255,255,255,.14)"
+              stroke="var(--trazo)"
               strokeWidth="1.5"
               vectorEffect="non-scaling-stroke"
             />

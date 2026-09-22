@@ -129,6 +129,12 @@ nuevo no puede cambiar el que ya estaba.
 | `--color-inset` | pieza dentro de una tarjeta | `navy-900` | `navy-50` |
 | `--color-control` | botón fantasma, campo, pastilla | `white/5` | blanco |
 | `--color-control-fuerte` | su estado activo | `white/10` | `navy-50` |
+| `--trazo` / `--trazo-fuerte` | línea de los diagramas | `white/14` · `/16` | `navy/16` · `/20` |
+
+**El trazo es el token que más se nota si falta.** Los diagramas son lo que explica de
+qué va el producto, y con la línea invisible quedan pulsos verdes flotando en el vacío.
+Un trazo fino se pierde antes sobre blanco que sobre negro, así que en claro va algo
+más marcado que su equivalente oscuro.
 
 **La escalera va en sentidos opuestos** y por eso `raise` e `inset` no pueden ser el
 mismo token: en oscuro una pieza dentro de una tarjeta es más CLARA que ella; en claro,
