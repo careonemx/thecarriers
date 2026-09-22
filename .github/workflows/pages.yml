@@ -1,0 +1,60 @@
+# Vista previa en GitHub Pages: https://careonemx.github.io/thecarriers/
+#
+# Construye el sitio como exportación estática y lo publica en cada push a main.
+# GITHUB_PAGES activa en next.config.ts el basePath y el noindex; sin esa
+# variable el proyecto se comporta como siempre, para desarrollo y para un
+# despliegue en dominio propio.
+name: Vista previa en GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Un despliegue a la vez, sin cancelar el que ya está en curso.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - run: npm ci
+
+      - name: Construir exportación estática
+        run: npm run build
+        env:
+          GITHUB_PAGES: "true"
+          NEXT_PUBLIC_SITE_URL: https://careonemx.github.io/thecarriers
+
+      # Sin .nojekyll, Pages ignora los directorios que empiezan con guion bajo
+      # y la página sale sin estilos: todo el bundle vive en _next/.
+      - name: Desactivar Jekyll
+        run: touch out/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - id: despliegue
+        uses: actions/deploy-pages@v4

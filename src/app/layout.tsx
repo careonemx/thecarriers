@@ -14,6 +14,13 @@ const inter = localFont({
 });
 
 export const metadata: Metadata = {
+  // La vista previa de GitHub Pages vive en un subdominio prestado y con un
+  // dominio propio todavía por confirmar. Que Google la indexe ahora significa
+  // que después compita contra el dominio real, así que se publica con noindex.
+  // El link sigue siendo visible para cualquiera que lo tenga.
+  ...(process.env.GITHUB_PAGES === "true" && {
+    robots: { index: false, follow: false },
+  }),
   title: "TheCarriers — Todas tus paqueterías. Una sola plataforma.",
   description:
     "Conecta tus canales de venta y tus cuentas de paquetería en un solo lugar. Genera guías, monitorea envíos y opera múltiples carriers sin entrar a cada portal.",
