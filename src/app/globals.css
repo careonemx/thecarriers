@@ -179,9 +179,10 @@ body {
   overflow-x: clip;
 }
 
-/* Que los controles nativos (select, barras de scroll) salgan oscuros. */
+/* Que los controles nativos (select, barras de scroll) salgan a tono. El
+   atributo del tema manda sobre esto; aquí solo está el del que abre. */
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {

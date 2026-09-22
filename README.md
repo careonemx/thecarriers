@@ -145,10 +145,13 @@ impresión.
 son una foto de algo que es oscuro de verdad. El atributo les devuelve los tokens
 oscuros, así que lo de dentro sigue siendo legible sin escribir ningún color a mano.
 
-El tema vive en `localStorage` bajo `tc-tema` y lo aplica un script en línea del
-layout, antes del primer pintado. El sitio se exporta estático: el servidor no puede
-leer la preferencia, y dejárselo a React haría que la página se viera un instante en
-oscuro antes de saltar a claro.
+**El sitio abre en claro.** El tema vive en `localStorage` bajo `tc-tema` y lo aplica
+un script en línea del layout, antes del primer pintado. El sitio se exporta estático:
+el servidor no puede leer la preferencia, y dejárselo a React haría que la página se
+viera un instante con el tema equivocado antes de saltar al bueno.
+
+Cambiar cuál abre por defecto son dos sitios que tienen que decir lo mismo: el
+`data-tema` de `<html>` en el layout y el valor que busca ese script.
 
 ## Tipografía
 

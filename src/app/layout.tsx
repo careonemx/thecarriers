@@ -70,8 +70,10 @@ export const metadata: Metadata = {
   },
 };
 
+/* El color con el que el navegador pinta su propia barra. Va el del tema que
+   abre por defecto; quien cambie a oscuro se lo lleva la propia página. */
 export const viewport: Viewport = {
-  themeColor: "#0b1220",
+  themeColor: "#ffffff",
 };
 
 /* El tema vive en localStorage y el servidor no puede leerlo: este sitio se
@@ -80,13 +82,13 @@ export const viewport: Viewport = {
    `suppressHydrationWarning` le dice a React que acepte el atributo que puso
    el script en vez del que trae su render. */
 const APLICAR_TEMA = `(function(){try{var t=localStorage.getItem("tc-tema");` +
-  `if(t==="claro")document.documentElement.setAttribute("data-tema","claro")}catch(e){}})()`;
+  `if(t==="oscuro")document.documentElement.setAttribute("data-tema","oscuro")}catch(e){}})()`;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="es-MX"
-      data-tema="oscuro"
+      data-tema="claro"
       suppressHydrationWarning
       className={`${inter.variable} h-full`}
     >
