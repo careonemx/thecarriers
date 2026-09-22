@@ -59,14 +59,19 @@ export function HowItWorks() {
           <ConvergenceDiagram />
         </Reveal>
 
-        <ol className="mt-12 grid gap-4 md:grid-cols-3">
+        {/* Tres columnas desde `lg` y no desde `md`: con el dibujo al lado, a
+            768px el título se partía en cuatro renglones. Entre medias va una
+            tarjeta por fila, donde sobra sitio. */}
+        <ol className="mt-12 grid gap-4 lg:grid-cols-3">
           {steps.map((s, i) => (
             <Reveal key={s.n} delay={i * 90}>
-              <li className={`${card} h-full`}>
+              <li className={`${card} flex h-full items-start gap-4`}>
                 <StepGlyph name={s.glifo} />
-                <p className="tabular mt-5 font-mono text-xs text-link">{s.n}</p>
-                <h3 className="mt-2 text-lg font-semibold text-strong">{s.t}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
+                <div className="min-w-0">
+                  <p className="tabular font-mono text-xs text-link">{s.n}</p>
+                  <h3 className="mt-1.5 text-lg font-semibold text-strong">{s.t}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{s.d}</p>
+                </div>
               </li>
             </Reveal>
           ))}

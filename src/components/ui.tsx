@@ -132,42 +132,44 @@ function Trayecto({ d, dur, delay = 0 }: { d: string; dur: number; delay?: numbe
 }
 
 /* Los tres glifos comparten caja y, sobre todo, la MISMA zona útil dentro de
-   ella: x de 6 a 126, y de 8 a 56. Sin eso cada uno se estiraba hasta donde
-   le pedía su propio dibujo —el primero llegaba al borde de abajo y el
-   tercero se quedaba flotando— y las tres tarjetas, puestas en fila, no
-   casaban. La caja es la misma; lo que hay que igualar es el contenido. */
-const G = { x0: 6, x1: 126, y0: 8, y1: 56, cy: 32 };
+   ella: x de 4 a 60, y de 8 a 56. Sin eso cada uno se estiraba hasta donde le
+   pedía su propio dibujo y las tres tarjetas, puestas en fila, no casaban.
 
-/** Los cuatro carriles del abanico, repartidos dentro de la zona útil. */
-const CARRILES = [13, 26, 39, 52];
+   Son cuadrados de 64 y no tiras de 132 porque van al LADO del texto: con la
+   caja ancha, en una tarjeta de tres columnas no quedaba sitio para el título
+   sin partirlo en cuatro renglones. */
+const G = { x0: 4, x1: 60, y0: 8, y1: 56, cy: 32 };
+
+/** Los tres carriles del abanico, repartidos dentro de la zona útil. */
+const CARRILES = [16, 32, 48];
 
 export function StepGlyph({ name }: { name: Glifo }) {
   return (
     <svg
-      viewBox="0 0 132 64"
+      viewBox="0 0 64 64"
       fill="none"
       aria-hidden
-      className="h-16 w-[132px] text-link"
+      className="h-16 w-16 shrink-0 text-link"
     >
       {name === "canales" && (
         <>
           {CARRILES.map((y, i) => (
             <g key={y}>
-              <rect x={G.x0} y={y - 5} width="30" height="10" rx="3" stroke={tenue} />
-              <Trayecto d={`M36 ${y} C 72 ${y}, 78 ${G.cy}, 104 ${G.cy}`} dur={2.8} delay={i * 0.25} />
+              <rect x={G.x0} y={y - 4} width="18" height="8" rx="2.5" stroke={tenue} />
+              <Trayecto d={`M22 ${y} C 32 ${y}, 34 ${G.cy}, 42 ${G.cy}`} dur={2.8} delay={i * 0.3} />
             </g>
           ))}
-          <rect x="104" y={G.cy - 10} width="20" height="20" rx="6" stroke="var(--color-accent)" />
+          <rect x="42" y={G.cy - 8} width="16" height="16" rx="5" stroke="var(--color-accent)" />
         </>
       )}
 
       {name === "cuentas" && (
         <>
-          <rect x={G.x0 + 2} y={G.cy - 10} width="20" height="20" rx="6" stroke="var(--color-accent)" />
+          <rect x={G.x0 + 2} y={G.cy - 8} width="16" height="16" rx="5" stroke="var(--color-accent)" />
           {CARRILES.map((y, i) => (
             <g key={y}>
-              <Trayecto d={`M28 ${G.cy} C 60 ${G.cy}, 66 ${y}, 96 ${y}`} dur={2.8} delay={0.3 + i * 0.25} />
-              <rect x="96" y={y - 5} width="30" height="10" rx="3" stroke={tenue} />
+              <Trayecto d={`M22 ${G.cy} C 30 ${G.cy}, 32 ${y}, 42 ${y}`} dur={2.8} delay={0.3 + i * 0.3} />
+              <rect x="42" y={y - 4} width="18" height="8" rx="2.5" stroke={tenue} />
             </g>
           ))}
         </>
@@ -177,18 +179,18 @@ export function StepGlyph({ name }: { name: Glifo }) {
         <>
           <rect
             x={G.x0}
-            y={G.y0}
+            y={G.y0 + 2}
             width={G.x1 - G.x0}
-            height={G.y1 - G.y0}
-            rx="8"
+            height={G.y1 - G.y0 - 4}
+            rx="6"
             stroke={tenue}
           />
           <path d={`M${G.x0} 22 H ${G.x1}`} stroke={tenue} strokeWidth="1.5" />
-          <path d={`M34 ${G.y0} V ${G.y1}`} stroke={tenue} strokeWidth="1.5" />
-          <Trayecto d="M44 34 H 116" dur={2.4} />
-          <Trayecto d="M44 46 H 116" dur={2.4} delay={0.6} />
-          <circle cx="14" cy="15" r="2" fill={tenue} stroke="none" />
-          <circle cx="22" cy="15" r="2" fill={tenue} stroke="none" />
+          <path d={`M21 ${G.y0 + 2} V ${G.y1 - 2}`} stroke={tenue} strokeWidth="1.5" />
+          <Trayecto d="M27 33 H 54" dur={2.4} />
+          <Trayecto d="M27 44 H 54" dur={2.4} delay={0.6} />
+          <circle cx="10" cy="15" r="1.6" fill={tenue} stroke="none" />
+          <circle cx="15.5" cy="15" r="1.6" fill={tenue} stroke="none" />
         </>
       )}
     </svg>
