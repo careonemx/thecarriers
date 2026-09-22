@@ -8,7 +8,8 @@ export const dynamic = "force-static";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: SITE_URL,
+      // Con la barra final, para que coincida exactamente con el canonical.
+      url: `${SITE_URL}/`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 1,

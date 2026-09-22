@@ -127,11 +127,46 @@ pyftsubset InterVariable.woff2 --output-file=InterVariable.woff2 --flavor=woff2 
   `NEXT_PUBLIC_FORM_ENDPOINT`. Sin eso, nadie puede solicitar acceso.
 - **Dominio y correo.** `hola@thecarriers.mx` y `SITE_URL` son provisionales. Confirmar
   antes de publicar: `SITE_URL` alimenta el sitemap.
-- **Open Graph.** Falta `metadataBase`, `og:url`, `og:image` y canonical en
-  `layout.tsx`. Sin imagen OG, el link compartido sale sin tarjeta.
+- **Apuntar el dominio.** Nada se va a indexar hasta que `thecarriers.mx` exista y
+  sirva el sitio. Todo lo de abajo ya está escrito apuntando a ese dominio.
 - **Logos.** `public/brand/*.svg` son un trazado de bitmap (miles de segmentos `L`), no
   un vector limpio: 22 KB el lockup y 12 KB el isotipo. Un re-export vectorial real los
   dejaría en 1–2 KB y se verían mejor en tamaños chicos.
+
+## Indexación
+
+Todo apunta a `NEXT_PUBLIC_SITE_URL`, así que el mismo código sirve para la vista
+previa y para el dominio definitivo.
+
+- `src/app/robots.ts` → `/robots.txt`. Permite todo y lista uno por uno los
+  rastreadores de IA (GPTBot, ClaudeBot, PerplexityBot, Google-Extended…): la regla
+  general ya los cubría, pero así queda explícito y es un solo lugar que tocar el día
+  que haya que excluir a alguno.
+- `src/app/sitemap.ts` → `/sitemap.xml`. Una sola URL, con la barra final, para que
+  coincida exactamente con el canonical.
+- `src/app/llms.txt/route.ts` → `/llms.txt`. Resumen en texto plano para modelos de
+  lenguaje (convención de llmstxt.org, no un estándar obligatorio). Se arma desde
+  `src/lib/content.ts` para que no se desincronice del sitio.
+- `src/app/opengraph-image.png` y `twitter-image.png`, 1200×630, con su `.alt.txt`.
+  Son PNG estáticos, no generados en tiempo de ejecución, porque el sitio se exporta
+  estático. Para rehacerlos hay que volver a renderizar el diseño y reemplazarlos.
+- `src/components/DatosEstructurados.tsx` → JSON-LD de `Organization` y `WebSite`.
+  Solo declara lo verificable en la página: nada de precios, valoraciones ni número
+  de clientes.
+
+Dos trampas ya resueltas, por si alguien las vuelve a pisar:
+
+- **`metadataBase` lleva el ORIGEN, sin ruta.** Next antepone el `basePath` a las
+  imágenes de la metadata por su cuenta; con el subdirectorio dentro de
+  `metadataBase`, `og:image` salía duplicado (`/thecarriers/thecarriers/…`).
+- **El canonical y `og:url` van absolutos.** A esos Next *no* les antepone el
+  `basePath`, así que con una ruta relativa apuntaban a la raíz del dominio.
+
+**En GitHub Pages el robots.txt no sirve para nada.** Los rastreadores solo leen el
+de la raíz del dominio, y `careonemx.github.io/robots.txt` no es nuestro (da 404). Ahí
+lo único que manda es el `noindex` del HTML, que la vista previa lleva a propósito
+para no competir después contra el dominio real. Se quita borrando la rama
+`GITHUB_PAGES` de `robots` en `src/app/layout.tsx`.
 
 ## Deploy
 
