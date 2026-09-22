@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Lockup } from "./Logo";
 import { nav } from "@/lib/content";
+import { APP_URL } from "@/lib/site";
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -57,6 +58,14 @@ export function Header() {
         </nav>
 
         <div className="flex shrink-0 items-center gap-2">
+          {/* Desde sm: en pantallas muy angostas compite con el botón principal. */}
+          <a
+            href={APP_URL}
+            className="hidden px-2 py-2.5 text-sm font-medium text-muted transition-colors duration-200 ease-[var(--ease-signal)] hover:text-ink sm:inline-flex"
+          >
+            Iniciar sesión
+          </a>
+
           <a
             href="#acceso"
             className="inline-flex items-center whitespace-nowrap rounded-lg bg-accent px-3 py-2.5 text-sm font-semibold text-abyss transition-[filter] duration-200 ease-[var(--ease-signal)] hover:brightness-110 sm:px-4"
@@ -104,11 +113,17 @@ export function Header() {
               key={n.href}
               href={n.href}
               onClick={() => setOpen(false)}
-              className="border-b border-hairline py-3.5 text-sm font-medium text-muted transition-colors duration-200 last:border-b-0 hover:text-ink"
+              className="border-b border-hairline py-3.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-ink"
             >
               {n.label}
             </a>
           ))}
+          <a
+            href={APP_URL}
+            className="py-3.5 text-sm font-medium text-muted transition-colors duration-200 hover:text-ink"
+          >
+            Iniciar sesión
+          </a>
         </nav>
       </div>
     </header>

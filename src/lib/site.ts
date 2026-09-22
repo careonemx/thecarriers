@@ -11,3 +11,10 @@ export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thecarriers
  * producía og:image en /thecarriers/thecarriers/…
  */
 export const SITE_ORIGIN = new URL(SITE_URL).origin;
+
+/**
+ * La aplicación. Hoy es el prototipo de interfaz publicado en su propio
+ * repositorio; el día que exista la app real, se cambia aquí y nada más.
+ */
+export const APP_URL =
+  process.env.NEXT_PUBLIC_APP_URL ?? "https://careonemx.github.io/thecarriers-app/";

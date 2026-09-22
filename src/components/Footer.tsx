@@ -1,6 +1,7 @@
 import { Lockup } from "./Logo";
 import { Year } from "./Year";
 import { nav } from "@/lib/content";
+import { APP_URL } from "@/lib/site";
 
 export function Footer() {
   return (
@@ -22,6 +23,9 @@ export function Footer() {
           ))}
           <a href="#acceso" className="py-1 transition-colors duration-200 hover:text-ink">
             Solicitar acceso
+          </a>
+          <a href={APP_URL} className="py-1 transition-colors duration-200 hover:text-ink">
+            Iniciar sesión
           </a>
         </nav>
         <p className="text-xs text-muted">
