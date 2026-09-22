@@ -155,6 +155,7 @@ export const plataformas: Nodo[] = [
   { nombre: "Skydropx", sigla: "Sk" },
   { nombre: "EnviaYa", sigla: "EY" },
   { nombre: "Envíame", sigla: "Em" },
+  { nombre: "Turbo Envíos", sigla: "Tb" },
 ];
 
 /** Lo que sale del otro lado del nodo. Es lo que consumen los diagramas. */
