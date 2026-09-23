@@ -83,6 +83,17 @@
   /* El trazo de los diagramas: la línea por la que corre el pulso verde. Es
      el token que más se nota si falta, porque son los dibujos que explican de
      qué va el producto, y sin él quedan pulsos verdes flotando en el vacío. */
+
+  /* El nodo del diagrama: el único sitio donde la marca se pone en el centro.
+     En oscuro va con halo, que es como se destaca sobre negro. En claro un
+     resplandor de color se lee como una mancha, así que el nodo se levanta
+     con una sombra apenas teñida y el borde afloja: sobre blanco, un verde al
+     40% deja de ser un acento y pasa a ser la línea más marcada de la
+     pantalla. */
+  --borde-nodo: rgba(15, 157, 110, 0.4);
+  --halo-nodo: rgba(15, 157, 110, 0.38);
+  --sombra-nodo: 0 24px 70px -30px rgba(15, 157, 110, 0.9);
+
   --trazo: rgba(255, 255, 255, 0.14);
   --trazo-fuerte: rgba(255, 255, 255, 0.16);
 
@@ -173,6 +184,9 @@
   --halo-hero: rgba(27, 42, 74, 0.95);
   --sombra-tarjeta: none;
   --sombra-tarjeta-hover: 0 24px 60px -40px rgba(15, 157, 110, 0.8);
+  --borde-nodo: rgba(15, 157, 110, 0.4);
+  --halo-nodo: rgba(15, 157, 110, 0.38);
+  --sombra-nodo: 0 24px 70px -30px rgba(15, 157, 110, 0.9);
 }
 
 [data-tema="claro"] {
@@ -225,6 +239,10 @@
      verde: sobre blanco un brillo de color se lee como un error de impresión. */
   --sombra-tarjeta: 0 1px 2px rgba(18, 28, 51, 0.04), 0 12px 32px -20px rgba(18, 28, 51, 0.14);
   --sombra-tarjeta-hover: 0 1px 2px rgba(18, 28, 51, 0.05), 0 22px 48px -24px rgba(18, 28, 51, 0.2);
+  --borde-nodo: rgba(15, 157, 110, 0.32);
+  --halo-nodo: rgba(15, 157, 110, 0.1);
+  --sombra-nodo: 0 1px 2px rgba(18, 28, 51, 0.05),
+                 0 18px 44px -26px rgba(15, 157, 110, 0.45);
 }
 
 html,

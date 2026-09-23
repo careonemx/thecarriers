@@ -116,9 +116,9 @@ function CoreNode({
     <div className={`relative shrink-0 ${className}`}>
       <div
         aria-hidden
-        className="halo pointer-events-none absolute -inset-8 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.38),transparent_68%)] blur-2xl"
+        className="halo pointer-events-none absolute -inset-8 rounded-full bg-[radial-gradient(circle,var(--halo-nodo),transparent_68%)] blur-2xl"
       />
-      <div className="relative flex flex-col items-center justify-center rounded-2xl border border-accent/40 bg-destacado px-4 py-6 text-center shadow-[0_24px_70px_-30px_rgba(15,157,110,.9)]">
+      <div className="relative flex flex-col items-center justify-center rounded-2xl border border-[var(--borde-nodo)] bg-destacado px-4 py-6 text-center shadow-[var(--sombra-nodo)]">
         <Mark variant="auto" height={alto} />
         <p className="mt-3 text-sm font-semibold leading-tight text-strong">{titulo}</p>
         <p className="mt-1 text-[11px] leading-tight text-muted">{pie}</p>
@@ -408,9 +408,9 @@ export function ApiFlow() {
         <div className="relative w-full">
           <div
             aria-hidden
-            className="halo pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle,rgba(15,157,110,.32),transparent_70%)] blur-2xl"
+            className="halo pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle,var(--halo-nodo),transparent_70%)] blur-2xl"
           />
-          <div className="relative flex w-full items-center gap-3 rounded-xl border border-accent/40 bg-destacado px-4 py-4 shadow-[0_24px_70px_-34px_rgba(15,157,110,.9)]">
+          <div className="relative flex w-full items-center gap-3 rounded-xl border border-[var(--borde-nodo)] bg-destacado px-4 py-4 shadow-[var(--sombra-nodo)]">
             <Mark variant="auto" height={26} />
             <div>
               <p className="text-sm font-semibold leading-tight text-strong">TheCarriers API</p>
