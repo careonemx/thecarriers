@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type CSSProperties, type ReactNode } from "react";
+import { useState, type CSSProperties } from "react";
 import { Mark } from "./Logo";
 import { canales, paqueterias, plataformas, rotuloDestinos, type Nodo } from "@/lib/content";
 
@@ -37,18 +37,6 @@ const centros = (alturas: number[], colH: number) => {
  */
 const altoFicha = (n: number, colH: number, max: number, hueco = 8) =>
   Math.min(max, Math.floor((colH - (n - 1) * hueco) / n));
-
-/**
- * La columna de salida: seis paqueterías y, debajo, las plataformas juntas en
- * un solo recuadro. Once fichas iguales contra seis canales cargaban el
- * diagrama hacia la derecha y apretaban cada ficha a la mitad de alto; así
- * las dos columnas tienen seis fichas de peso parecido, y las plataformas se
- * leen como lo que son: otra vía hacia esas mismas paqueterías.
- */
-const alturasSalida = (paq: number, plat: number) => [
-  ...paqueterias.map(() => paq),
-  plat,
-];
 
 /* -----------------------------------------------------------------
  * Cables
@@ -149,9 +137,6 @@ function CoreNode({
 const H_COL = 480;
 const H_WIRE = 104;
 const H_CHIP_MAX = 52;
-const H_PAQ = 46;
-/** Cabe el rótulo y tres renglones de plataformas en la columna más angosta (lg). */
-const H_PLAT = 128;
 
 export function HeroNetwork() {
   const [activo, setActivo] = useState<{ lado: "in" | "out"; i: number } | null>(null);
@@ -173,7 +158,7 @@ export function HeroNetwork() {
             <span aria-hidden style={{ width: H_WIRE }} className="shrink-0" />
             <span aria-hidden className="w-[172px] shrink-0" />
             <span aria-hidden style={{ width: H_WIRE }} className="shrink-0" />
-            <Rotulo alineado>{rotuloDestinos}</Rotulo>
+            <Rotulo alineado>Tus paqueterías</Rotulo>
           </div>
 
           <div className="flex items-center">
@@ -194,29 +179,21 @@ export function HeroNetwork() {
             <CoreNode alto={38} className="w-[172px]" />
             <Wires
               dir="out"
-              ys={centros(alturasSalida(H_PAQ, H_PLAT), H_COL)}
+              ys={centros(paqueterias.map(() => altoCanalHero), H_COL)}
               w={H_WIRE}
               colH={H_COL}
               activo={activo?.lado === "out" ? activo.i : null}
             />
             <Columna
               items={paqueterias}
-              alto={H_PAQ}
+              alto={altoCanalHero}
               lado="out"
               activo={activo}
               onActivo={setActivo}
-            >
-              <li
-                style={{ height: H_PLAT }}
-                onMouseEnter={() => setActivo({ lado: "out", i: paqueterias.length })}
-                onMouseLeave={() => setActivo(null)}
-              >
-                <GrupoPlataformas
-                  encendido={activo?.lado === "out" && activo.i === paqueterias.length}
-                />
-              </li>
-            </Columna>
+            />
           </div>
+
+          <PlataformasAbajo />
         </div>
 
         {/* Bajo lg, el mismo flujo de arriba hacia abajo. */}
@@ -236,14 +213,12 @@ function Columna({
   lado,
   activo,
   onActivo,
-  children,
 }: {
   items: Nodo[];
   alto: number;
   lado: "in" | "out";
   activo: { lado: "in" | "out"; i: number } | null;
   onActivo: (v: { lado: "in" | "out"; i: number } | null) => void;
-  children?: ReactNode;
 }) {
   return (
     <div className="min-w-0 flex-1">
@@ -267,43 +242,54 @@ function Columna({
             </li>
           );
         })}
-        {children}
       </ul>
     </div>
   );
 }
 
-/** Las plataformas, juntas: un recuadro con su rótulo y una ficha chica por cada una. */
-function GrupoPlataformas({ encendido = false }: { encendido?: boolean }) {
+/**
+ * Las plataformas, debajo del diagrama y no dentro de él. Once fichas contra
+ * seis canales desbalanceaban la columna derecha, y meterlas en un recuadro
+ * dentro de ella lo cambiaba por un bloque que pesaba más que cualquier
+ * ficha. Abajo, en una línea, se leen como lo que son: otra vía hacia esas
+ * mismas paqueterías. Es lo que hace el teléfono, a lo ancho.
+ */
+function PlataformasAbajo({ conLinea = true }: { conLinea?: boolean }) {
   return (
-    <div
-      className={`flex h-full flex-col justify-center rounded-xl border px-3 py-2.5 transition-colors duration-300 ease-[var(--ease-signal)] ${
-        encendido ? "border-accent/50 bg-destacado" : "border-hairline bg-inset"
-      }`}
-    >
-      <p className="text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+    <div className={`text-center ${conLinea ? "mt-8 border-t border-hairline pt-5" : "mt-8"}`}>
+      <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted">
         Plataformas de envío
       </p>
-      <Pastillas items={plataformas} className="mt-2" />
+      <Pastillas items={plataformas} enLinea className="mt-3" />
     </div>
   );
 }
 
 /**
- * Fichas chicas, tres por renglón y del mismo ancho, con el último renglón
- * centrado. Dejando que se acomodaran solas, cinco caían en cuatro y una, y
- * la quinta quedaba sola como si fuera distinta; tres y dos se lee a propósito.
+ * Fichas chicas. En el teléfono, tres por renglón y del mismo ancho, con el
+ * último centrado: sueltas, cinco caían en cuatro y una, y la quinta quedaba
+ * sola como si fuera distinta. `enLinea` las deja a su ancho natural en un
+ * solo renglón, para el escritorio, donde caben las cinco.
  */
-function Pastillas({ items, className = "" }: { items: Nodo[]; className?: string }) {
+function Pastillas({
+  items,
+  enLinea = false,
+  className = "",
+}: {
+  items: Nodo[];
+  enLinea?: boolean;
+  className?: string;
+}) {
   return (
-    <ul className={`flex flex-wrap justify-center gap-1.5 ${className}`}>
+    <ul className={`flex flex-wrap justify-center ${enLinea ? "gap-2" : "gap-1.5"} ${className}`}>
       {items.map((p) => (
         <li
           key={p.nombre}
-          /* Entre lg y xl la columna del diagrama da 74px por ficha y "Turbo
-             Envíos" pedía 82: se partía en dos líneas y su ficha quedaba más
-             alta que las otras cuatro. Ahí baja un punto. */
-          className="basis-[calc((100%-0.75rem)/3)] whitespace-nowrap rounded-md border border-hairline bg-control px-1.5 py-1 text-center text-[11px] font-medium leading-tight text-ink lg:px-1 lg:text-[10px] xl:px-1.5 xl:text-[11px]"
+          className={`whitespace-nowrap rounded-md border border-hairline bg-control text-center font-medium leading-tight text-ink ${
+            enLinea
+              ? "px-3 py-1.5 text-xs"
+              : "basis-[calc((100%-0.75rem)/3)] px-1.5 py-1 text-[11px]"
+          }`}
         >
           {p.nombre}
         </li>
@@ -435,8 +421,6 @@ function Flechas({ dir }: { dir: "in" | "out" }) {
 const C_COL = 400;
 const C_WIRE = 76;
 const C_CHIP_MAX = 44;
-const C_PAQ = 36;
-const C_PLAT = 116;
 
 const chipCompacta =
   "flex items-center justify-center rounded-md border border-hairline bg-inset px-2 text-center text-[11px] font-medium leading-tight text-ink transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-inset-fuerte sm:text-xs";
@@ -462,20 +446,22 @@ export function ConvergenceDiagram() {
         <CoreNode alto={30} className="w-[150px]" />
         <Wires
           dir="out"
-          ys={centros(alturasSalida(C_PAQ, C_PLAT), C_COL)}
+          ys={centros(paqueterias.map(() => altoCanal), C_COL)}
           w={C_WIRE}
           colH={C_COL}
         />
         <ul className="flex min-w-0 flex-1 flex-col justify-between" style={{ height: C_COL }}>
           {paqueterias.map((p) => (
-            <li key={p.nombre} style={{ height: C_PAQ }} className={chipCompacta}>
+            <li key={p.nombre} style={{ height: altoCanal }} className={chipCompacta}>
               {p.nombre}
             </li>
           ))}
-          <li style={{ height: C_PLAT }}>
-            <GrupoPlataformas />
-          </li>
         </ul>
+      </div>
+      {/* Sin línea propia: el pie de rótulos de abajo ya separa, y dos
+          líneas seguidas cortaban la tarjeta en tres franjas. */}
+      <div className="mx-auto hidden max-w-[920px] lg:block">
+        <PlataformasAbajo conLinea={false} />
       </div>
 
       <div className="lg:hidden">
