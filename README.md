@@ -175,12 +175,9 @@ pyftsubset InterVariable.woff2 --output-file=InterVariable.woff2 --flavor=woff2 
 
 ## Pendientes antes de publicar
 
-- **Endpoint del formulario.** Falta crear el formulario en Formspree y poner su URL en
-  `NEXT_PUBLIC_FORM_ENDPOINT`. Sin eso, nadie puede solicitar acceso.
-- **Dominio y correo.** `hola@thecarriers.mx` y `SITE_URL` son provisionales. Confirmar
-  antes de publicar: `SITE_URL` alimenta el sitemap.
-- **Apuntar el dominio.** Nada se va a indexar hasta que `thecarriers.mx` exista y
-  sirva el sitio. Todo lo de abajo ya está escrito apuntando a ese dominio.
+- **Apuntar el dominio.** Nada se va a indexar hasta que `thecarriers.com.mx` sirva el
+  sitio desde Netlify. Todo lo de abajo ya está escrito apuntando a ese dominio.
+- **Buzón.** `hola@thecarriers.com.mx` aparece en el sitio: tiene que existir y recibir.
 - **Logos.** `public/brand/*.svg` son un trazado de bitmap (miles de segmentos `L`), no
   un vector limpio: 22 KB el lockup y 12 KB el isotipo. Un re-export vectorial real los
   dejaría en 1–2 KB y se verían mejor en tamaños chicos.

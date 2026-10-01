@@ -101,8 +101,8 @@ export function AccessForm() {
           className="rounded-lg border border-red-400/40 bg-red-400/10 px-3 py-2.5 text-xs text-red-200"
         >
           No pudimos enviar tu solicitud. Vuelve a intentarlo o escríbenos a{" "}
-          <a href="mailto:hola@thecarriers.mx" className="font-medium underline underline-offset-2">
-            hola@thecarriers.mx
+          <a href="mailto:hola@thecarriers.com.mx" className="font-medium underline underline-offset-2">
+            hola@thecarriers.com.mx
           </a>
           .
         </p>

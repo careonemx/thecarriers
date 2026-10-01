@@ -18,7 +18,7 @@ const datos = {
       name: "The Carriers",
       url: SITE_URL,
       logo: `${SITE_URL}/brand/lockup.svg`,
-      email: "hola@thecarriers.mx",
+      email: "hola@thecarriers.com.mx",
       description:
         "Plataforma que conecta los canales de venta de una empresa con sus propias " +
         "cuentas de paquetería, para generar guías y dar seguimiento a los envíos " +

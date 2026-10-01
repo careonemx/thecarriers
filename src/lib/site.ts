@@ -1,8 +1,7 @@
 /**
- * Dominio del sitio. Provisional: confirmar antes de publicar (ver README).
- * Se puede sobreescribir con NEXT_PUBLIC_SITE_URL sin tocar código.
+ * Dominio del sitio. Se puede sobreescribir con NEXT_PUBLIC_SITE_URL sin tocar código.
  */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thecarriers.mx";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://thecarriers.com.mx";
 
 /**
  * Solo el origen, sin ruta. `metadataBase` debe recibir esto y no SITE_URL: en

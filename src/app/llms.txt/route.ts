@@ -71,7 +71,7 @@ ${audiences.map((a) => `- ${a.t}: ${a.d}`).join("\n")}
 ## Contacto
 
 Sitio: ${SITE_URL}
-Correo: hola@thecarriers.mx
+Correo: hola@thecarriers.com.mx
 Ubicación: Puebla, México
 
 ## Nota sobre marcas
