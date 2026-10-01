@@ -7,8 +7,10 @@ import { btnPrimario } from "./ui";
 /**
  * Formulario de acceso anticipado.
  *
- * Envía a Formspree con fetch para poder mostrar el resultado en la misma
- * página. El endpoint vive en NEXT_PUBLIC_FORM_ENDPOINT (ver .env.example).
+ * Envía con fetch para poder mostrar el resultado en la misma página. El
+ * endpoint vive en NEXT_PUBLIC_FORM_ENDPOINT (ver .env.example): la URL de la
+ * aplicación web de Apps Script que guarda cada solicitud en una hoja de
+ * Google (script en docs/formulario-google.gs), o una de Formspree.
  *
  * Si falta esa variable, el visitante NO ve nada sobre la configuración: ve el
  * mismo aviso de error que ante cualquier otra falla, con un correo al cual
@@ -39,7 +41,12 @@ export function AccessForm() {
       const res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { Accept: "application/json" },
-        body: new FormData(e.currentTarget),
+        // Codificado como formulario y no como multipart: Apps Script solo
+        // lee los campos en e.parameter con este formato, y Formspree acepta
+        // los dos.
+        body: new URLSearchParams(
+          new FormData(e.currentTarget) as unknown as Record<string, string>,
+        ),
       });
       setEstado(res.ok ? "ok" : "error");
     } catch {
