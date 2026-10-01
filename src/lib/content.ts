@@ -137,9 +137,10 @@ export const canales: Nodo[] = [
  *   compitiendo: da igual si el cliente tiene contrato directo con DHL o
  *   cuenta en Skydropx, entra igual.
  *
- * En Integraciones van separadas, porque ahí hay espacio para ser precisos. En
- * los diagramas van juntas bajo `destinos`, porque ahí el rótulo tiene que ser
- * corto y el comprador les dice "paqueterías" a todas.
+ * Van separadas en todas partes. En los diagramas, las plataformas se juntan
+ * en un solo recuadro debajo de las paqueterías: once fichas iguales contra
+ * seis canales desbalanceaban el diagrama, y en el teléfono la undécima
+ * quedaba sola en su renglón.
  */
 export const paqueterias: Nodo[] = [
   { nombre: "DHL", sigla: "DH" },
@@ -158,10 +159,7 @@ export const plataformas: Nodo[] = [
   { nombre: "Turbo Envíos", sigla: "Tb" },
 ];
 
-/** Lo que sale del otro lado del nodo. Es lo que consumen los diagramas. */
-export const destinos: Nodo[] = [...paqueterias, ...plataformas];
-
-/** Su rótulo: una sola etiqueta para las dos familias. */
+/** El rótulo de lo que sale del otro lado del nodo: las dos familias. */
 export const rotuloDestinos = "Tus paqueterías y plataformas";
 
 /* ---------- El problema ---------- */

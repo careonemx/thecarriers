@@ -43,7 +43,11 @@ export function Api() {
         className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[420px] bg-[radial-gradient(45%_60%_at_50%_0%,rgba(15,157,110,.12),transparent_70%)]"
       />
       <div className="shell py-20 md:py-28">
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
+        {/* grid-cols-1 y no una rejilla sin columnas: sin ella, en el teléfono
+            el bloque de código (min-w-max) fijaba el ancho de la columna y
+            sacaba la tarjeta y el diagrama de la pantalla, en lugar de
+            desplazarse dentro de su caja. */}
+        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-link">API</p>
             <h2 className="mt-4 text-3xl font-semibold tracking-tight text-strong md:text-[2.75rem] md:leading-[1.08]">

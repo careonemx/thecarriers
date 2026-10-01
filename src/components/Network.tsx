@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import { Mark } from "./Logo";
-import { canales, destinos, rotuloDestinos, type Nodo } from "@/lib/content";
+import { canales, paqueterias, plataformas, rotuloDestinos, type Nodo } from "@/lib/content";
 
 /**
  * El lenguaje visual del sitio: muchos canales entran a una sola plataforma y
@@ -19,35 +19,52 @@ import { canales, destinos, rotuloDestinos, type Nodo } from "@/lib/content";
  * `justify-between` sobre una altura fija, y el SVG mide exactamente lo mismo,
  * así que cada curva nace en el centro de su ficha.
  */
-const chipY = (i: number, n: number, colH: number, chipH: number) =>
-  ((colH - chipH) * i) / (n - 1) + chipH / 2;
+/** El centro vertical de cada ficha en una columna con `justify-between`. */
+const centros = (alturas: number[], colH: number) => {
+  const libre = colH - alturas.reduce((a, b) => a + b, 0);
+  const hueco = alturas.length > 1 ? libre / (alturas.length - 1) : 0;
+  let y = alturas.length > 1 ? 0 : libre / 2;
+  return alturas.map((h) => {
+    const c = y + h / 2;
+    y += h + hueco;
+    return c;
+  });
+};
 
 /**
- * Las dos columnas miden lo mismo pero no tienen la misma cantidad de fichas:
- * seis canales contra diez paqueterías. Con un alto de ficha único, la columna
- * corta queda con huecos enormes o la larga se desborda. Así que cada columna
- * calcula el suyo: llena `colH` dejando al menos `hueco` entre fichas, sin
- * pasar de `max` para que tres fichas no se conviertan en tres losas.
+ * Llena `colH` con `n` fichas dejando al menos `hueco` entre ellas, sin pasar
+ * de `max` para que tres fichas no se conviertan en tres losas.
  */
 const altoFicha = (n: number, colH: number, max: number, hueco = 8) =>
   Math.min(max, Math.floor((colH - (n - 1) * hueco) / n));
+
+/**
+ * La columna de salida: seis paqueterías y, debajo, las plataformas juntas en
+ * un solo recuadro. Once fichas iguales contra seis canales cargaban el
+ * diagrama hacia la derecha y apretaban cada ficha a la mitad de alto; así
+ * las dos columnas tienen seis fichas de peso parecido, y las plataformas se
+ * leen como lo que son: otra vía hacia esas mismas paqueterías.
+ */
+const alturasSalida = (paq: number, plat: number) => [
+  ...paqueterias.map(() => paq),
+  plat,
+];
 
 /* -----------------------------------------------------------------
  * Cables
  * --------------------------------------------------------------- */
 function Wires({
   dir,
-  n,
+  ys,
   w,
   colH,
-  chipH,
   activo,
 }: {
   dir: "in" | "out";
-  n: number;
+  /** El centro de cada ficha: cada curva nace o muere ahí. */
+  ys: number[];
   w: number;
   colH: number;
-  chipH: number;
   activo?: number | null;
 }) {
   const mid = colH / 2;
@@ -60,8 +77,7 @@ function Wires({
       aria-hidden
       className="shrink-0"
     >
-      {Array.from({ length: n }, (_, i) => {
-        const y = chipY(i, n, colH, chipH);
+      {ys.map((y, i) => {
         const d =
           dir === "in"
             ? `M0 ${y} C ${w * 0.55} ${y}, ${w * 0.45} ${mid}, ${w} ${mid}`
@@ -133,6 +149,9 @@ function CoreNode({
 const H_COL = 480;
 const H_WIRE = 104;
 const H_CHIP_MAX = 52;
+const H_PAQ = 46;
+/** Cabe el rótulo y tres renglones de plataformas en la columna más angosta (lg). */
+const H_PLAT = 128;
 
 export function HeroNetwork() {
   const [activo, setActivo] = useState<{ lado: "in" | "out"; i: number } | null>(null);
@@ -158,25 +177,45 @@ export function HeroNetwork() {
           </div>
 
           <div className="flex items-center">
-            <Columna items={canales} lado="in" activo={activo} onActivo={setActivo} />
+            <Columna
+              items={canales}
+              alto={altoCanalHero}
+              lado="in"
+              activo={activo}
+              onActivo={setActivo}
+            />
             <Wires
               dir="in"
-              n={canales.length}
+              ys={centros(canales.map(() => altoCanalHero), H_COL)}
               w={H_WIRE}
               colH={H_COL}
-              chipH={altoFicha(canales.length, H_COL, H_CHIP_MAX)}
               activo={activo?.lado === "in" ? activo.i : null}
             />
             <CoreNode alto={38} className="w-[172px]" />
             <Wires
               dir="out"
-              n={destinos.length}
+              ys={centros(alturasSalida(H_PAQ, H_PLAT), H_COL)}
               w={H_WIRE}
               colH={H_COL}
-              chipH={altoFicha(destinos.length, H_COL, H_CHIP_MAX)}
               activo={activo?.lado === "out" ? activo.i : null}
             />
-            <Columna items={destinos} lado="out" activo={activo} onActivo={setActivo} />
+            <Columna
+              items={paqueterias}
+              alto={H_PAQ}
+              lado="out"
+              activo={activo}
+              onActivo={setActivo}
+            >
+              <li
+                style={{ height: H_PLAT }}
+                onMouseEnter={() => setActivo({ lado: "out", i: paqueterias.length })}
+                onMouseLeave={() => setActivo(null)}
+              >
+                <GrupoPlataformas
+                  encendido={activo?.lado === "out" && activo.i === paqueterias.length}
+                />
+              </li>
+            </Columna>
           </div>
         </div>
 
@@ -189,18 +228,23 @@ export function HeroNetwork() {
   );
 }
 
+const altoCanalHero = altoFicha(canales.length, H_COL, H_CHIP_MAX);
+
 function Columna({
   items,
+  alto,
   lado,
   activo,
   onActivo,
+  children,
 }: {
   items: Nodo[];
+  alto: number;
   lado: "in" | "out";
   activo: { lado: "in" | "out"; i: number } | null;
   onActivo: (v: { lado: "in" | "out"; i: number } | null) => void;
+  children?: ReactNode;
 }) {
-  const alto = altoFicha(items.length, H_COL, H_CHIP_MAX);
   return (
     <div className="min-w-0 flex-1">
       <ul className="flex flex-col justify-between" style={{ height: H_COL }}>
@@ -223,8 +267,48 @@ function Columna({
             </li>
           );
         })}
+        {children}
       </ul>
     </div>
+  );
+}
+
+/** Las plataformas, juntas: un recuadro con su rótulo y una ficha chica por cada una. */
+function GrupoPlataformas({ encendido = false }: { encendido?: boolean }) {
+  return (
+    <div
+      className={`flex h-full flex-col justify-center rounded-xl border px-3 py-2.5 transition-colors duration-300 ease-[var(--ease-signal)] ${
+        encendido ? "border-accent/50 bg-destacado" : "border-hairline bg-inset"
+      }`}
+    >
+      <p className="text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+        Plataformas de envío
+      </p>
+      <Pastillas items={plataformas} className="mt-2" />
+    </div>
+  );
+}
+
+/**
+ * Fichas chicas, tres por renglón y del mismo ancho, con el último renglón
+ * centrado. Dejando que se acomodaran solas, cinco caían en cuatro y una, y
+ * la quinta quedaba sola como si fuera distinta; tres y dos se lee a propósito.
+ */
+function Pastillas({ items, className = "" }: { items: Nodo[]; className?: string }) {
+  return (
+    <ul className={`flex flex-wrap justify-center gap-1.5 ${className}`}>
+      {items.map((p) => (
+        <li
+          key={p.nombre}
+          /* Entre lg y xl la columna del diagrama da 74px por ficha y "Turbo
+             Envíos" pedía 82: se partía en dos líneas y su ficha quedaba más
+             alta que las otras cuatro. Ahí baja un punto. */
+          className="basis-[calc((100%-0.75rem)/3)] whitespace-nowrap rounded-md border border-hairline bg-control px-1.5 py-1 text-center text-[11px] font-medium leading-tight text-ink lg:px-1 lg:text-[10px] xl:px-1.5 xl:text-[11px]"
+        >
+          {p.nombre}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -255,8 +339,10 @@ function FlujoVertical() {
       <Flechas dir="in" />
       <CoreNode alto={30} className="mx-auto w-44" />
       <Flechas dir="out" />
-      <Rotulo className="mt-2">{rotuloDestinos}</Rotulo>
-      <Rejilla items={destinos} />
+      <Rotulo className="mt-2">Tus paqueterías</Rotulo>
+      <Rejilla items={paqueterias} />
+      <Rotulo className="mt-6">Plataformas de envío</Rotulo>
+      <Pastillas items={plataformas} />
     </div>
   );
 }
@@ -349,13 +435,14 @@ function Flechas({ dir }: { dir: "in" | "out" }) {
 const C_COL = 400;
 const C_WIRE = 76;
 const C_CHIP_MAX = 44;
+const C_PAQ = 36;
+const C_PLAT = 116;
 
 const chipCompacta =
   "flex items-center justify-center rounded-md border border-hairline bg-inset px-2 text-center text-[11px] font-medium leading-tight text-ink transition-colors duration-300 ease-[var(--ease-signal)] hover:border-hairline-strong hover:bg-inset-fuerte sm:text-xs";
 
 export function ConvergenceDiagram() {
   const altoCanal = altoFicha(canales.length, C_COL, C_CHIP_MAX);
-  const altoPaq = altoFicha(destinos.length, C_COL, C_CHIP_MAX);
   return (
     <div className="rounded-2xl border border-hairline bg-raise p-5 sm:p-6">
       <div className="mx-auto hidden max-w-[920px] items-center lg:flex">
@@ -366,15 +453,28 @@ export function ConvergenceDiagram() {
             </li>
           ))}
         </ul>
-        <Wires dir="in" n={canales.length} w={C_WIRE} colH={C_COL} chipH={altoCanal} />
+        <Wires
+          dir="in"
+          ys={centros(canales.map(() => altoCanal), C_COL)}
+          w={C_WIRE}
+          colH={C_COL}
+        />
         <CoreNode alto={30} className="w-[150px]" />
-        <Wires dir="out" n={destinos.length} w={C_WIRE} colH={C_COL} chipH={altoPaq} />
+        <Wires
+          dir="out"
+          ys={centros(alturasSalida(C_PAQ, C_PLAT), C_COL)}
+          w={C_WIRE}
+          colH={C_COL}
+        />
         <ul className="flex min-w-0 flex-1 flex-col justify-between" style={{ height: C_COL }}>
-          {destinos.map((p) => (
-            <li key={p.nombre} style={{ height: altoPaq }} className={chipCompacta}>
+          {paqueterias.map((p) => (
+            <li key={p.nombre} style={{ height: C_PAQ }} className={chipCompacta}>
               {p.nombre}
             </li>
           ))}
+          <li style={{ height: C_PLAT }}>
+            <GrupoPlataformas />
+          </li>
         </ul>
       </div>
 
@@ -421,17 +521,23 @@ export function ApiFlow() {
 
         <Abanico />
 
-        {/* Tres columnas fijas: el abanico termina exactamente en sus centros. */}
+        {/* Tres columnas fijas: el abanico termina exactamente en sus centros.
+            Seis paqueterías son dos renglones completos; las plataformas van
+            aparte, para que la quinta no quede sola en un tercero. */}
         <ul className="grid w-full grid-cols-3 gap-2">
-          {destinos.map((p) => (
+          {paqueterias.map((p) => (
             <li
               key={p.nombre}
-              className="truncate rounded-md border border-hairline bg-inset px-2 py-1.5 text-center text-[11px] font-medium text-ink"
+              className="truncate rounded-md border border-hairline bg-inset px-1 py-1.5 text-center text-[10px] font-medium text-ink sm:px-2 sm:text-[11px]"
             >
               {p.nombre}
             </li>
           ))}
         </ul>
+        <p className="mt-5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted">
+          Plataformas de envío
+        </p>
+        <Pastillas items={plataformas} className="mt-2 w-full" />
       </div>
     </div>
   );
