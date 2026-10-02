@@ -35,7 +35,7 @@ export function Hero() {
 
           <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a href="#acceso" className={`${btnPrimario} w-full max-w-xs sm:w-auto`}>
-              Solicitar acceso anticipado
+              Conectar mis paqueterías
             </a>
             <a href="#como-funciona" className={`${btnFantasma} w-full max-w-xs sm:w-auto`}>
               Ver cómo funciona

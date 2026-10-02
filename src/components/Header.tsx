@@ -38,7 +38,7 @@ export function Header() {
           </Link>
           <span className="hidden items-center gap-2 rounded-full border border-hairline px-2.5 py-1 text-[11px] font-medium text-muted lg:inline-flex">
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Acceso anticipado · México
+            Hecho para México
           </span>
         </div>
 

@@ -111,11 +111,10 @@ export function Integrations() {
             titulo="Plataformas de envío"
             items={plataformas}
             nota="Si ya compras tus guías a través de una de estas, también se conecta."
-            /* Auto-fit en vez de un número fijo: con cuatro plataformas cabían
-               justas, y al entrar la quinta quedaba sola en una segunda fila,
-               como si fuera distinta de las demás. Así la rejilla se ajusta a
-               cuantas haya sin que nadie tenga que venir a contar. */
-            columnas="grid-cols-[repeat(auto-fit,minmax(190px,1fr))]"
+            /* Tres columnas: nueve plataformas son tres renglones completos.
+               Con auto-fit caían en cinco y cuatro, y el hueco del final se
+               leía como una que faltaba. Si cambia la cuenta, revisar esto. */
+            columnas="sm:grid-cols-3"
           />
         </Reveal>
 

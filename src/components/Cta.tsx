@@ -20,23 +20,29 @@ export function Cta() {
               formulario tenía media tarjeta y solo ocupaba 448px, y los 124
               que sobraban se sumaban al hueco entre columnas. Ahora su columna
               mide lo que él. */}
-          <div className="relative grid gap-12 md:grid-cols-[1fr_28rem] md:items-center">
+          {/* Arriba, no centrado: con el formulario de fichas la columna
+              derecha mide el doble que el texto, y centrado dejaba un hueco
+              encima del título. */}
+          <div className="relative grid gap-12 md:grid-cols-[1fr_28rem] md:items-start">
             <div>
+              {/* Sin "acceso anticipado": daba a entender que la plataforma no
+                  estaba lista, y el título repetía lo que dice el botón del
+                  formulario de al lado. */}
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-link">
-                Acceso anticipado
+                Empieza hoy
               </p>
               <h2 className="mt-4 text-3xl font-semibold tracking-tight text-strong md:text-4xl">
-                Solicita acceso anticipado
+                Todas tus paqueterías, en una sola pantalla
               </h2>
               <p className="mt-5 max-w-[56ch] text-muted md:text-lg">
-                Estamos incorporando un grupo reducido de empresas en México. Cuéntanos qué canales
-                utilizas y con qué paqueterías trabajas.
+                Dinos qué canales utilizas y con qué paqueterías trabajas, y preparamos la conexión
+                contigo.
               </p>
               <ul className="mt-8 max-w-[58ch] space-y-3 text-sm text-muted">
                 {[
-                  "Sin costo durante el acceso anticipado.",
+                  "Tus credenciales y contratos siguen siendo tuyos: solo se usan para operar tus envíos.",
                   "Conectamos tus canales y paqueterías contigo durante el onboarding.",
-                  "Tus accesos son tuyos: solo se usan para operar tus envíos.",
+                  "Sin tarjeta de crédito ni compromiso.",
                 ].map((t) => (
                   <li key={t} className="flex gap-3">
                     <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />

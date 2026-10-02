@@ -1,8 +1,7 @@
 /**
  * Contenido de la landing.
  *
- * El producto está en acceso anticipado y las conexiones se construyen durante
- * el onboarding, con el cliente. Por eso aquí no se promete "con un clic" ni
+ * Las conexiones se construyen durante el onboarding, con el cliente. Por eso aquí no se promete "con un clic" ni
  * "en minutos", y los canales y paqueterías se presentan como aquellos con los
  * que somos compatibles (nunca "trabajamos con", "aliados" ni "partners"),
  * sin estados en vivo ni tiempos simulados.
@@ -14,7 +13,7 @@
 
 /* ---------- Hero ---------- */
 export const hero = {
-  eyebrow: "Acceso anticipado · México",
+  eyebrow: "Hecho para México",
   h1: ["Todas tus paqueterías.", "Una sola plataforma."],
   sub: "Conecta tus canales de venta y tus cuentas de paquetería en un solo lugar. Genera guías, monitorea envíos y opera múltiples carriers sin entrar a cada portal. Si tienes un sistema propio, intégralo una sola vez mediante nuestra API.",
   claim: "Tus cuentas. Tus tarifas. Tus paqueterías. Una sola integración.",
@@ -157,6 +156,10 @@ export const plataformas: Nodo[] = [
   { nombre: "EnviaYa", sigla: "EY" },
   { nombre: "Envíame", sigla: "Em" },
   { nombre: "Turbo Envíos", sigla: "Tb" },
+  { nombre: "Envia.com", sigla: "En" },
+  { nombre: "Mienvío", sigla: "Mi" },
+  { nombre: "Enviaclick", sigla: "Ec" },
+  { nombre: "Pakke", sigla: "Pk" },
 ];
 
 /** El rótulo de lo que sale del otro lado del nodo: las dos familias. */

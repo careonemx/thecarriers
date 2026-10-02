@@ -40,7 +40,7 @@ al agregar una paquetería nueva no hay que desarrollar otra integración.
 
 ## Estado del producto
 
-En acceso anticipado, en México. Se vende por solicitud y llamada. Las
+Disponible en México. Se contrata por solicitud y llamada. Las
 conexiones se construyen con el cliente durante el onboarding, así que no hay
 alta automática ni activación inmediata.
 
