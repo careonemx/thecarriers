@@ -13,7 +13,6 @@
 
 /* ---------- Hero ---------- */
 export const hero = {
-  eyebrow: "Hecho para México",
   h1: ["Todas tus paqueterías.", "Una sola plataforma."],
   sub: "Conecta tus canales de venta y tus cuentas de paquetería en un solo lugar. Genera guías, monitorea envíos y opera múltiples carriers sin entrar a cada portal. Si tienes un sistema propio, intégralo una sola vez mediante nuestra API.",
   claim: "Tus cuentas. Tus tarifas. Tus paqueterías. Una sola integración.",

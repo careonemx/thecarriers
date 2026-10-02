@@ -36,10 +36,6 @@ export function Header() {
           >
             <Lockup variant="auto" height={26} priority />
           </Link>
-          <span className="hidden items-center gap-2 rounded-full border border-hairline px-2.5 py-1 text-[11px] font-medium text-muted lg:inline-flex">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent" />
-            Hecho para México
-          </span>
         </div>
 
         {/* Desde md, no desde lg: entre 768 y 1023 el menú quedaba inalcanzable. */}
